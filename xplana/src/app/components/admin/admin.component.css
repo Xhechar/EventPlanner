@@ -1,0 +1,11 @@
+.entire-page {
+  width: 100%;
+  height: 150vh;
+  background-color: rgb(28, 28, 28);
+  color: white;
+}
+.contents {
+  width: 83%;
+  margin-top: 10vh;
+  margin-left: 16vw;
+}

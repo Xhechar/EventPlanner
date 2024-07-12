@@ -1,0 +1,158 @@
+.entire-contents {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  background-color: white;
+  border-radius: 10px;
+  width: 80%;
+  height: 73%;
+  row-gap: 2%;
+  display: grid;
+  grid-template-rows: 15% 1fr 10%;
+  box-shadow: 0 0 10PX rgba(0, 0, 0, 0.2);
+}
+
+.inside-form {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-image: url(../../../../public/events/christmas-7655448_640.webp);
+}
+
+.inside-form h1 {
+  color: white;
+  font-weight: 600;
+}
+
+.inside-form h4 {
+  color: rgb(242, 242, 242);
+  font-size: small;
+}
+
+.dark {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.inputs {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+
+.left, .right {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 92%;
+  grid-template-rows: 1fr 1fr 1fr 1fr 2fr;
+  align-items: center;
+  justify-content: flex-start;
+  row-gap: 1%;
+}
+
+.detail, .textarea, .right-items {
+  margin-left: 4%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.detail label, .textarea label, .right-items label {
+  margin-top: 1%;
+}
+
+.detail input, .right-items input, .right-items select {
+  background-color: rgb(228, 228, 228);
+  margin-top: 1%;
+  margin-left: 3%;
+  width: 90%;
+  height: 70%;
+  border-radius: 10px;
+  border: none;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.textarea {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1%;
+  grid-template-rows: 1fr;
+}
+
+.text {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20% 1fr;
+}
+
+textarea {
+  padding-top: 2%;
+  margin-left: 5%;
+  width: 90%;
+  height: 92%;
+  border-radius: 10px;
+  border: none;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.text1 {
+  height: 40%;
+}
+
+.right {
+  grid-template-rows: repeat(7, 1fr);
+  border-left: 1px solid ;
+}
+
+.button-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 1%;
+}
+
+.button-container button{
+  width: 10%;
+  height: 80%;
+}
+
+.Cancel {
+  background-color: rgb(194, 10, 10);
+}
+
+.Cancel:hover {
+  background-color: rgba(194, 10, 10, 0.724);
+}

@@ -1,0 +1,127 @@
+.dashboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 5vh;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.time-display {
+  width: 100%;
+  height: 8vh;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+}
+
+.today {
+  width: 100%;
+  display:flex;
+  align-items: center;
+}
+
+.new-event {
+  display: block;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.grid-header {
+  background-color: rgb(193, 240, 255);
+  width: 100%;
+  height: 12vh;
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: large;
+  font-weight: 800;
+  border-bottom: 2px solid #ddd;
+  border-radius: 10px;
+}
+
+.event-item {
+  width: 100%;
+  height: 10vh;
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.event-item:hover {
+  background-color: rgb(233, 255, 233);
+  cursor: pointer;
+}
+
+.header-item {
+  height: 50%;
+  border-right: 1px solid#000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-title {
+  display: grid;
+  grid-template-columns: 10% 40% 40%;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-title img {
+  width: 100px;
+  border-radius: 5px;
+}
+
+.item-name,
+.item-date,
+.item-earned,
+.item-status,
+.item-actions {
+  padding: 5px;
+  text-align: center;
+}
+
+.item-status {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.item-status.approved {
+  background-color: #4caf50;
+}
+
+.item-status.pending {
+  background-color: #ff9800;
+}
+
+.action-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.action-btn.delete {
+  background-color: #f44336;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}

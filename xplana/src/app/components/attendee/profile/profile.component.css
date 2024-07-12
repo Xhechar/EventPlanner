@@ -1,0 +1,240 @@
+.container {
+  width: 100%;
+  height: auto;
+}
+
+header {
+  background-image: linear-gradient(
+    to right,
+    rgb(200, 236, 248),
+    rgb(192, 189, 189)
+  );
+  width: 100%;
+  height: 13vh;
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 2vh;
+}
+
+header > div {
+  margin: 2%;
+}
+
+.name-and-date {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+header p {
+  font-size: 14px;
+  color: #777;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-right: 20%;
+  column-gap: 3%;
+}
+
+.header-right label {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.header-right select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile {
+  width: 100%;
+  height: 13vh;
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  align-items: center;
+}
+
+.profile-and-details {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 25% 1fr;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.profile-and-details:hover {
+  cursor: pointer;
+  background-color: rgba(209, 243, 255, 0.3);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.botton-holder {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile img {
+  width: 80%;
+  height: 90%;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.info {
+  width: 100%;
+}
+
+.profile-info h2 {
+  font-size: 20px;
+  color: #333;
+}
+
+.profile-info p {
+  font-size: 14px;
+  color: #777;
+}
+
+.update-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+}
+
+.update-profile img {
+  width: 15%;
+}
+
+.info {
+  margin-top: 5vh;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2%;
+  border-radius: 10px;
+}
+
+.first,
+.second {
+  width: 100%;
+  height: 35vh;
+  display: grid;
+}
+
+.first {
+  grid-template-rows: 1fr 1fr 1fr;
+  row-gap: 3%;
+}
+
+.second {
+  grid-template-rows: 1fr 1fr 1fr;
+  row-gap: 3%;
+}
+
+.info-field {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 40% 1fr;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(119, 119, 119, 0.1);
+}
+
+.info-field label {
+  font-size: 14px;
+  color: #777;
+}
+
+.info-field input {
+  margin-left: 3%;
+  width: 80%;
+  height: 80%;
+  padding-left: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.email {
+  width: 100%;
+  height: 12vh;
+  border-radius: 10px;
+  margin-top: 3vh;
+  display: flex;
+  column-gap: 1%;
+}
+
+.email-icon {
+  background-color: rgb(176, 200, 252);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 50%;
+  width: 8%;
+  height: 100%;
+}
+
+.email-icon img {
+  width: 40%;
+}
+
+.email h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.email p {
+  font-size: 14px;
+  line-height: 150%;
+  color: #777;
+}
+
+.email-infoo {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}

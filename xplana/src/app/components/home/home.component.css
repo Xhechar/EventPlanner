@@ -1,0 +1,630 @@
+.landing-page {
+  width: 100%;
+}
+
+.landing-image {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../../../public/events/white 4.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.darkbg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: flex-end;
+  justify-content: start;
+}
+
+.title-and-text {
+  margin-left: 14%;
+  margin-bottom: 10%;
+  width: 40%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.title-and-text h1 {
+  font-size: 40px;
+  font-weight: 600;
+  width: 70%;
+  line-height: 120%;
+}
+
+.title-and-text p {
+  font-size: 14px;
+  width: 70%;
+  line-height: 120%;
+  color: rgb(46, 45, 45);
+}
+
+.images {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25% 15% 30%;
+  align-items: center;
+  position: relative;
+}
+
+.images img {
+  width: 60%;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.single,
+.single1,
+.single2,
+.single3,
+.single4 {
+  position: absolute;
+}
+
+.single {
+  left: 0;
+}
+
+.single1 {
+  left: 3%;
+}
+
+.single2 {
+  left: 6%;
+}
+
+.single3 {
+  left: 9%;
+}
+
+.single4 {
+  left: 12%;
+}
+
+.img {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.images p {
+  font-size: small;
+}
+
+.section {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subheading {
+  width: 50%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.subheading h1 {
+  font-size: 30px;
+  font-weight: 600;
+  width: 90%;
+  line-height: 120%;
+}
+
+.subheading p {
+  font-size: 14px;
+  width: 60%;
+  line-height: 160%;
+  color: rgb(46, 45, 45);
+}
+
+.subheading button {
+  margin-top: 2%;
+  padding: 2% 5%;
+}
+
+.section1 {
+  background-color: #ececec;
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.section1 img {
+  height: 100%;
+  position: absolute;
+  top: 15vh;
+}
+
+.tally {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20vh;
+  height: 20vh;
+}
+
+.counts {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.counts > div {
+  text-align: center;
+  line-height: 200%;
+}
+
+.counts h1 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.counts p {
+  font-size: 14px;
+  color: rgb(46, 45, 45);
+}
+
+.section2 {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered-image-and-text {
+  width: 50%;
+  height: 70%;
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  align-items: center;
+}
+
+.centered-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.centered-image img {
+  width: 80%;
+  height: 90%;
+  border-radius: 50%;
+}
+
+.centered-image h1 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1000%;
+  color: rgb(46, 45, 45);
+  font-weight: 500;
+  font-style: normal;
+}
+
+.centered-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.centered-text h1 {
+  margin-bottom: 6%;
+  font-size: 30px;
+}
+
+.centered-text p,
+.centered-text h5 {
+  font-size: 14px;
+  line-height: 160%;
+  color: rgb(46, 45, 45);
+  margin-bottom: 5%;
+}
+
+.centered-text h5 {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.centered-text h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.section3 {
+  width: 100%;
+  height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-items {
+  width: 80%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 30% 1fr;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+}
+
+.title-and-button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title-and-button h1 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.title-and-button button {
+  width: 30%;
+  padding: 2% 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: 600;
+}
+
+.events-holder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  column-gap: 2%;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  top: 50%;
+}
+
+.events-holder > div {
+  padding: 1%;
+  width: 35%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+  transition: all 0.5s ease;
+  color: black;
+}
+
+.events-holder > div:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+  cursor: pointer;
+}
+
+.event {
+  background-image: url(../../../../public/events/club1.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.event1 {
+  background-image: url(../../../../public/events/beach\ party.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.event2 {
+  background-image: url(../../../../public/events/club3.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.event h1,
+.event1 h1,
+.event2 h1 {
+  margin-bottom: 20px;
+}
+
+.section4 {
+  margin-top: 30vh;
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centered-items {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 2%;
+}
+
+.centered-items > div img {
+  width: 30%;
+  border-radius: 50%;
+}
+
+.centered-items > div {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section5 {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+}
+
+.centered-image-and-floating-text {
+  margin-left: 20%;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  grid-template-columns: 40% 1fr;
+  align-items: center;
+  position: relative;
+}
+
+.centered-image-and-floating-text img {
+  width: 100%;
+  height: 100%;
+}
+
+.centered-image1 {
+  width: 100%;
+  height: 100%;
+}
+
+.floating-text {
+  padding: 5%;
+  width: 70%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background-color: white;
+  left: 60%;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+  border-radius: 10px;
+}
+
+.floating-text h1 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 3%;
+}
+
+.floating-text p {
+  font-size: 14px;
+  color: rgb(46, 45, 45);
+  line-height: 160%;
+  margin-bottom: 3%;
+}
+
+.section6 {
+  margin-top: 15vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.events-title {
+  text-align: center;
+  width: 50%;
+  height: 20vh;
+}
+
+.events-title h1 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 2%;
+}
+
+.events-title p {
+  font-size: 14px;
+  color: rgb(46, 45, 45);
+  line-height: 160%;
+  margin-bottom: 3%;
+}
+
+.dynamic-events {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  column-gap: 1%;
+  text-align: center;
+}
+
+.event-card {
+  width: 24%;
+  height: 60vh;
+  background-image: url(../../../../public/events/club1.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+  transition: all 0.5s ease;
+  padding: 1%;
+}
+
+.event-card:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+  cursor: pointer;
+}
+
+.event-card h3 {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.event-card p {
+  font-size: 14px;
+  font-weight: 800;
+  color: rgb(46, 45, 45);
+  line-height: 160%;
+  margin-bottom: 3%;
+}
+
+span {
+  text-decoration: underline;
+}
+
+.block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-image: linear-gradient(to right, lightorange, lightgreen);
+  padding: 1%;
+}
+
+.contact-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+  background-color: #fff;
+}
+
+.contact-container {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form textarea {
+  resize: none;
+  height: 100px;
+}
+
+.contact-form button {
+  padding: 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer p {
+  margin-bottom: 10px;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.footer-container div {
+  margin-bottom: 20px;
+}
+
+.footer-container h4 {
+  margin-bottom: 10px;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-social img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-top: 20px;
+}
+
+.footer-copyright {
+  margin-top: 20px;
+  font-size: 14px;
+}

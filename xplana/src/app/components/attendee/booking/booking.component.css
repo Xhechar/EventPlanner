@@ -1,0 +1,74 @@
+.entire-contents {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1vh;
+}
+
+.time-display {
+  width: 100%;
+  height: 8vh;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+}
+
+.today {
+  width: 100%;
+  display:flex;
+  align-items: center;
+}
+
+.bookings {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.header, .dynamic-display {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(153, 152, 152);
+}
+
+.item, .detail {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.item {
+  border-right: 1px solid rgb(124, 122, 122);}
+
+.detail {
+  border-radius: 10px;
+}
+
+.detail img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.dynamic-display {
+  background-color: transparent;
+}
+
+button {
+  width: 30%;
+  padding: 2px;
+}

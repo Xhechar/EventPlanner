@@ -1,0 +1,26 @@
+<div class="entire-contents">
+  <div class="container">
+    <div class="image-placeholder">
+      <div class="dark">
+        <h1 style="color: white; width: 50%; margin-left: 5%; font-size: 45px; font-weight: 600;">Welcome back x_planner</h1>
+      </div>
+    </div>
+    <div class="form-container">
+        <form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)">
+            <h2>Login</h2>
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" name="email" ngModel required email>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" ngModel required>
+                <div *ngIf="loginForm.submitted || loginForm.controls">
+                </div>
+            </div>
+            <button type="submit" [disabled]="loginForm.invalid">Login</button>
+            <p style="margin-top: 2vh;">Don't have an account? <a routerLink="/register">Register Now</a></p>
+        </form>
+    </div>
+  </div>
+</div>
