@@ -38,6 +38,15 @@
   justify-content: center;
 }
 
+.error {
+  margin-top: 1vh;
+}
+
+.error p {
+  color: rgb(190, 17, 17);
+  font-size: 10px;
+}
+
 .form-container {
   width: 50%;
   padding: 30px;

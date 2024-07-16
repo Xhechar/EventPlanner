@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start:build": "tsc -w",
+    "start:run": "nodemon dist/server.js",
+    "start": "concurrently npm:start:*",
+    "test": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/nodemon": "^1.19.6",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7"
+  }
+}
