@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { TokenInfo } from '../interfaces/interfaces';
-import jwt from 'jsonwebtoken';
+import jwt, { decode } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -22,9 +22,26 @@ export const verifyTokens = (req: extendedRequest, res: Response, next: NextFunc
   }
   else {
 
-    let data = jwt.verify(token, process.env.SECRET_KEY as string) as TokenInfo;
-
-    req.info = data;
+    jwt.verify(token, process.env.SECRET_KEY as string, (err, data) => {
+      if(err) {
+        if (err.name == "TokenExpiredError") {
+          return res.status(401).json({
+            error: "Your session has expired, please log in again"
+          })
+        }
+        else if (err.name == "JsonWebTokenError") {
+          return res.status(401).json({
+            error: "Invalid token, please log in again"
+          })
+        }
+        else {
+          return res.status(501).json({
+            error: "An error occurred while verifying the token"
+          })
+        }
+      }
+      req.info = data as TokenInfo;
+    })
 
   }
 
