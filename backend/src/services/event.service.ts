@@ -8,7 +8,7 @@ import lodash from "lodash";
 export class EventService {
   async createEvent(user_id: string, event: Events) {
 
-    let isManager = (await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0 AND role = 'manager'`)).recordset;
+    let isManager = (await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0 AND isManager = 1`)).recordset;
 
     if (lodash.isEmpty(isManager)) {
       return {
@@ -52,7 +52,7 @@ export class EventService {
 
   async updateEvent(event_id: string, user_id: string, event: Events) {
     let userExists = (
-      await Helper.query(`select * from events where user_id = '${user_id}'`)
+      await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0 AND isManager = 1`)
     ).recordset;
 
     if (lodash.isEmpty(userExists)) {
@@ -73,7 +73,7 @@ export class EventService {
       };
     }
 
-    let isManager = (await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0 AND role = 'manager'`)).recordset;
+    let isManager = (await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0 AND isManager = 1`)).recordset;
 
     if (lodash.isEmpty(isManager)) {
       return {
@@ -214,7 +214,7 @@ export class EventService {
   async getAllEventsByDateCreated() {
     let result = (
       await Helper.query(
-        "select * from events where createdAt = DATEADD(day, -1, CAST(-GETDATE() AS DATE))"
+        "select * from events where createdAt = DATEADD(day, -1, CAST(GETDATE() AS DATE))"
       )
     ).recordset;
 

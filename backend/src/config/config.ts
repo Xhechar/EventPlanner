@@ -15,7 +15,9 @@ export const sqlConfig = {
   },
   options: {
     encrypt: false,
-    trustServerCertificate: true
+    trustServerCertificate: true,
+    connectTimeout: 30000,
+    requestTimeout: 30000
   }
 }
 

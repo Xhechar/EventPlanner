@@ -2,7 +2,7 @@ import { Helper } from "../db_helper/dbhelper";
 import { Book, User } from "../interfaces/interfaces";
 import { v4 } from "uuid";
 import lodash from "lodash";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 export class UserService {
   async registerUser(user: User) {
@@ -188,7 +188,7 @@ export class UserService {
   async getAllUsersByDateCreated() {
     let result = (
       await Helper.query(
-        "select * from users where createdAt = DATEADD(day, -1, CAST(GETDATE() as DATE)) AND isDeleted = 0"
+        "select * from users where createdAt = DATEADD(day, -3, CAST(GETDATE() as DATE)) AND isDeleted = 0"
       )
     ).recordset;
 
@@ -217,7 +217,7 @@ export class UserService {
       };
     } else {
       return {
-        message: "User updated successfully to managers",
+        message: "User updated successfully to manager",
       };
     }
   }

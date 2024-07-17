@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { extendedRequest } from './verifyTokens';
 import { TokenInfo } from '../interfaces/interfaces';
 
-export const getIdFromToken = async (req: extendedRequest):Promise<string> => {
+export const getIdFromToken = (req: extendedRequest):string => {
   
   let info = req.info as TokenInfo;
 

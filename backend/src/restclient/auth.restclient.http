@@ -1,0 +1,8 @@
+### Login User
+POST http://localhost:6000/auth/login
+Content-type: application/json
+
+{
+  "email": "felixokoth078@gmail.com",
+  "password": "Pass@123"
+}

@@ -10,9 +10,9 @@ export class EventsController {
   async createEvent(req: Request, res: Response) {
 
     try {
-      let user_id = await getIdFromToken(req);
+      let user_id = getIdFromToken(req);
 
-      if (user_id = '') {
+      if (!user_id) {
         return res.status(501).json({
           error: "Could not get id from token headers"
         })
@@ -21,7 +21,9 @@ export class EventsController {
       let { error } = eventSchema.validate(req.body);
   
       if (error) {
-        return res.status(401).json({error})
+        return res.json({
+          error: error.message
+        })
       }
   
       let response = await event_service.createEvent(user_id, req.body);
@@ -36,13 +38,15 @@ export class EventsController {
   async updateEvent(req: Request, res: Response) {
 
     try {
-      let user_id = await getIdFromToken(req);
+      let user_id = getIdFromToken(req);
 
-      if (user_id = '') {
+      if (!user_id) {
         return res.status(501).json({
           error: "Could not get id from token headers"
         })
       }
+
+      console.log(user_id);
 
       let { error } = eventSchema.validate(req.body);
 
@@ -127,6 +131,8 @@ export class EventsController {
   async deleteEvent(req: Request, res: Response) {
 
     try {
+      console.log(req.params.event_id);
+      
 
       let response = await event_service.deleteEvent(req.params.event_id);
 

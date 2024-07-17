@@ -11,7 +11,7 @@ export class BookingController {
 
     try {
       
-      let user_id = await getIdFromToken(req);
+      let user_id = getIdFromToken(req);
 
       if(user_id == '') {
         return res.status(501).json({
@@ -33,13 +33,15 @@ export class BookingController {
 
     try {
       
-      let user_id = await getIdFromToken(req);
+      let user_id = getIdFromToken(req);
 
       if(user_id == '') {
         return res.status(501).json({
           error: "Could not get id from token headers"
         })
       }
+
+      console.log(user_id);
 
       let result = await booking_service.updateBooking(req.params.event_id, user_id, req.body);
       
@@ -55,7 +57,7 @@ export class BookingController {
 
     try {
       
-      let user_id = await getIdFromToken(req);
+      let user_id = getIdFromToken(req);
 
       if(user_id == '') {
         return res.status(501).json({
@@ -77,7 +79,7 @@ export class BookingController {
 
     try {
       
-      let user_id = await getIdFromToken(req);
+      let user_id = getIdFromToken(req);
 
       if(user_id == '') {
         return res.status(501).json({
@@ -101,7 +103,7 @@ export class BookingController {
 
     try {
       
-      let user_id = await getIdFromToken(req);
+      let user_id = getIdFromToken(req);
 
       if(user_id == '') {
         return res.status(501).json({

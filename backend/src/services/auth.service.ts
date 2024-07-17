@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { Logins } from '../interfaces/interfaces';
 import { Helper } from '../db_helper/dbhelper';
 import lodash from 'lodash';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import dotenv from 'dotenv'
 
 dotenv.config()

@@ -1,14 +1,22 @@
 import express, { json, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { userRoute } from './routers/user.router';
+import { events_route } from './routers/event.router';
+import { book_route } from './routers/booking.router';
+import { auth_route } from './routers/auth.router';
 
 dotenv.config();
 
 const app = express();
 
 app.use(json());
-
 app.use(cors());
+
+app.use('/users', userRoute);
+app.use('/events', events_route);
+app.use('/bookings', book_route);
+app.use('/auth', auth_route);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.json({
@@ -16,6 +24,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   })
 });
 
-app.listen(3000, () => {
+app.listen(6000, () => {
   console.log(`Server is running on port ${process.env.SERVER_PORT}`)
 })
