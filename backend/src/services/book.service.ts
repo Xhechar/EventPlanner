@@ -257,7 +257,7 @@ export class BookingService {
     let fetchedUsers: User[] = [];
 
     let userExists = (
-      await Helper.query(`select * from users where user_id = '${manager_id}'`)
+      await Helper.query(`select * from users where user_id = '${manager_id}' AND isDeleted = 0`)
     ).recordset;
 
     if (userExists.length == 0) {
@@ -292,45 +292,44 @@ export class BookingService {
           )).recordset;
 
           if (lodash.isEmpty(bookingsAvailable)) {
-            return {
-              error: "No bookings currently available for this event",
-            };
-          } else {
-            for (let booking of bookingsAvailable) {
+            continue;
+          }
+          else {
+            for (let booking of bookingsAvailable as User[]) {
               user_ids.push(booking.user_id);
             }
+          }
 
-            if (user_ids.length == 0) {
+          if (user_ids.length == 0) {
+            return {
+              error: "Unable to display users for this event",
+            };
+          }
+          else {
+            for (let user_id of user_ids) {
+              let retrievedUser = await user_service.getUserById(user_id);
+
+              if(retrievedUser.error) {
+                return {
+                  error: "The history of the user does not exist."
+                }
+                break;
+              }
+              else if (retrievedUser.user) {
+                fetchedUsers.push(retrievedUser.user[0] as unknown as User);
+              }
+            }
+
+            if (fetchedUsers.length == 0) {
               return {
-                error: "Unable to display users for this event",
+                error: "Unable to display the users retrieved.",
               };
             }
             else {
-              for (let user_id of user_ids) {
-                let retrievedUser = await user_service.getUserById(user_id);
-
-                if(retrievedUser.error) {
-                  return {
-                    error: "The history of the user does not exist."
-                  }
-                  break;
-                }
-                else if (retrievedUser.user) {
-                  fetchedUsers.push(retrievedUser.user[0] as unknown as User);
-                }
-              }
-
-              if (fetchedUsers.length == 0) {
-                return {
-                  error: "Unable to display the users retrieved.",
-                };
-              }
-              else {
-                return {
-                  message: "Users successfully retrieved",
-                  users: fetchedUsers,
-                };
-              }
+              return {
+                message: "Users successfully retrieved",
+                users: fetchedUsers,
+              };
             }
           }
         }
