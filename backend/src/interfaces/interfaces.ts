@@ -50,3 +50,21 @@ export interface TokenInfo {
   password: string,
   role: string
 }
+
+export interface MailConfigurations {
+  service: string,
+  host: string,
+  port: number,
+  requireTLS: boolean,
+  auth: {
+    user: string,
+    pass: string
+  }
+}
+
+export interface MessageOptions {
+  from: string,
+  to: string,
+  subject: string,
+  html: string
+}
