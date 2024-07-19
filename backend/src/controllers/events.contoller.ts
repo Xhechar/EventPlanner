@@ -66,8 +66,15 @@ export class EventsController {
   async updateEventStatusByAdmin(req: Request, res: Response) {
 
     try {
+      let user_id = getIdFromToken(req);
 
-      let response = await event_service.updateEventStatusByAdmin(req.params.event_id);
+      if (!user_id) {
+        return res.status(501).json({
+          error: "Could not get id from token headers"
+        })
+      }
+
+      let response = await event_service.updateEventStatusByAdmin(user_id ,req.params.event_id);
 
       return res.status(201).json(response);
     } catch (error) {

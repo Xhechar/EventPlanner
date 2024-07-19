@@ -1,6 +1,6 @@
 use xplana
 
-SELECT * FROM users
+SELECT * FROM events
 
 select * from users where createdAt = DATEADD(day, 3, GETDATE()) AND isDeleted = 0
 

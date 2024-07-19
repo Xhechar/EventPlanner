@@ -114,7 +114,17 @@ export class EventService {
     }
   }
 
-  async updateEventStatusByAdmin(event_id: string) {
+  async updateEventStatusByAdmin(user_id: string ,event_id: string) {
+    let userExists = (
+      await Helper.query(`select * from users where user_id = '${user_id}' AND role = 'admin' AND isDeleted = 0`)
+    ).recordset;
+
+    if (lodash.isEmpty(userExists)) {
+      return {
+        error: "This activity is not authorised, contact the admin.",
+      };
+    }
+
     let eventExists = (
       await Helper.query(`select * from events where event_id = '${event_id}'`)
     ).recordset;
@@ -197,7 +207,7 @@ export class EventService {
   }
 
   async getAllEvents() {
-    let result = (await Helper.query("select * from events")).recordset;
+    let result = (await Helper.query("select * from events where event_status = 'approved'")).recordset;
 
     if (lodash.isEmpty(result)) {
       return {

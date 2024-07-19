@@ -3,6 +3,6 @@ POST http://localhost:6000/auth/login
 Content-type: application/json
 
 {
-  "email": "jeffsmith001@gmail.com",
+  "email": "felixokoth078@gmail.com",
   "password": "Pass@123"
 }
