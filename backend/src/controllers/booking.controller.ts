@@ -133,4 +133,18 @@ export class BookingController {
 
   }
 
+  async getAllBookings(req: Request, res: Response) {
+
+    try {
+
+      let result = await booking_service.getAllBookings();
+      
+      return res.status(201).json(result);
+
+    } catch (error) {
+      return res.json({error})
+    }
+
+  }
+
 }

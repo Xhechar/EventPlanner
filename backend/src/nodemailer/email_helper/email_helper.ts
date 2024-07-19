@@ -24,7 +24,7 @@ export const sendMail = async (messageOptions: MessageOptions) => {
 
   await transporter.verify();
 
-  await transporter.sendMail(messageOptions, (err, info) => {
+  transporter.sendMail(messageOptions, (err, info) => {
     if (err) {
       console.log('Error occurred while sending mail: ', err);
     } else {

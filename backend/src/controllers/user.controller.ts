@@ -37,7 +37,7 @@ export class UserController {
         });
       }
 
-      let user_id = await getIdFromToken(req);
+      let user_id = getIdFromToken(req);
 
       if (user_id == "") {
         return res.status(501).json({
@@ -67,7 +67,7 @@ export class UserController {
 
   async getUserById(req: Request, res: Response) {
     try {
-      let user_id = await getIdFromToken(req);
+      let user_id = getIdFromToken(req);
 
       if (!user_id) {
         return res.status(501).json({

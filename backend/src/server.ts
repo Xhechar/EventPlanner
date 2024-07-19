@@ -5,6 +5,8 @@ import { userRoute } from './routers/user.router';
 import { events_route } from './routers/event.router';
 import { book_route } from './routers/booking.router';
 import { auth_route } from './routers/auth.router';
+import { welcomeUser } from './nodemailer/services/WelcomeUser';
+import cron from 'node-cron'
 
 dotenv.config();
 
@@ -27,3 +29,18 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 app.listen(6000, () => {
   console.log(`Server is running on port ${process.env.SERVER_PORT}`)
 })
+
+// const mail = express();
+
+// mail.listen(6001, async () => {
+//   console.log("Node mailer is running on port 6001");
+  
+//   const checkDB = async () => {
+//     cron.schedule('*/5 * * * * * ', async () => {
+//       console.log("Checking the database");
+      
+//       await welcomeUser();
+//     })
+//   }
+//   checkDB();
+// })

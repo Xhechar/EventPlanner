@@ -199,7 +199,7 @@ export class UserService {
     } else {
       return {
         message: "Users created recently successfully retrieved",
-        users: result,
+        users: result as User[],
       };
     }
   }

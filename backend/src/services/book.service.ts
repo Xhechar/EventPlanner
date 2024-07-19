@@ -62,7 +62,7 @@ export class BookingService {
     }
   }
 
-  async updateBooking(event_id: string, user_id: string, booking: Book) {
+  async updateBooking(book_id: string, user_id: string, booking: Book) {
     let userExists = (
       await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0`)
     ).recordset;
@@ -73,25 +73,26 @@ export class BookingService {
       };
     }
 
-    let eventExists = (
-      await Helper.query(`select * from events where event_id = '${event_id}'`)
-    ).recordset;
-
-    if (lodash.isEmpty(eventExists)) {
-      return {
-        error: "Event to be updated does not exist",
-      };
-    }
-
     let bookingExists = (
       await Helper.query(
-        `select * from bookings where event_id = '${event_id}' AND user_id = '${user_id}' AND book_status = 0`
+        `select * from bookings where book_id = '${book_id}' AND user_id = '${user_id}' AND book_status = 0`
       )
     ).recordset;
 
     if (lodash.isEmpty(bookingExists)) {
       return {
-        error: "Cannot update a booking that has been approved",
+        error: "Booking not found",
+      };
+    }
+
+    let removeExistingTally = await event_service.decrementBookingTally(
+      bookingExists[0].event_id,
+      bookingExists[0].ticket_type
+    );
+
+    if (removeExistingTally.error) {
+      return {
+        error: removeExistingTally.error,
       };
     }
 
@@ -109,19 +110,8 @@ export class BookingService {
         error: "Unable to complete booking update",
       };
     } else {
-      let removeExistingTally = await event_service.decrementBookingTally(
-        bookingExists[0].event_id,
-        bookingExists[0].ticket_type
-      );
-
-      if (removeExistingTally.error) {
-        return {
-          error: removeExistingTally.error,
-        };
-      }
-
       let decider = await event_service.increamentBookingTally(
-        event_id,
+        bookingExists[0].event_id,
         booking.ticket_type
       );
 
@@ -360,6 +350,22 @@ export class BookingService {
       return {
         message: "Booking approved successfully"
       }  
+    }
+  }
+
+  async getAllBookings() {
+    let result = (await Helper.query('select * from bookings')).recordset;
+
+    if (lodash.isEmpty(result)) {
+      return {
+        error: "No bookings currently found"
+      }
+    }
+    else {
+      return {
+        message: "Bookings successfully retrieved",
+        bookings: result
+      }
     }
   }
 }

@@ -172,7 +172,7 @@ export class EventService {
     } else {
       return {
         message: "Event successfully retrieved",
-        event: result,
+        event: result as Events[],
       };
     }
   }
@@ -206,7 +206,7 @@ export class EventService {
     } else {
       return {
         message: "Events successfully retrieved",
-        events: result,
+        events: result as Events[],
       };
     }
   }
