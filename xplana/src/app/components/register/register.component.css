@@ -6,9 +6,25 @@
   justify-content: center;
 }
 
+.errorMsg, .successMsg {
+  position: fixed;
+  top: 8vh;
+  width: 40vw;
+  height: 8vh;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 2px;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+}
+
 .middle-contents {
   width: 80%;
-  height: 80%;
+  height: 90%;
   border-radius: 10px;
   padding: 1%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -85,6 +101,7 @@ form > div {
   height: 10%;
   display: flex;
   margin-top: 1px;
+  margin-bottom: 1px;
   padding-left: 4px;
 }
 
@@ -135,4 +152,25 @@ select {
   border-radius: 10px;
   border-bottom: 1px dotted rgb(120, 119, 119);
   padding-left: 2%;
+}
+
+.loader {
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid rgb(0, 106, 255);
+  border-bottom: 3px solid rgb(0, 106, 255);
+  width: 8px;
+  height: 16px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Logins, User } from '../intefaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  baseURL = 'http://localhost:6000/users';
+  baseURL = 'http://localhost:3000/users';
   token_headers = new HttpHeaders({
     'Authorisation': `Bearer ${localStorage.getItem('token') as string}`
   });
@@ -14,6 +15,10 @@ export class UsersService {
 
   registerUser(user: User) {
     return this.http.post<{error?:string, message?:string}>(`${this.baseURL}/register`, user)
+  }
+
+  loginUser(logins: Logins) {
+    return this.http.post<{error?:string, role?: string, message?:string, token?: string}>('http://localhost:3000/auth/login', logins)
   }
 
   updateUser(user: User) {

@@ -13,7 +13,9 @@ dotenv.config();
 const app = express();
 
 app.use(json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:4200'
+}));
 
 app.use('/users', userRoute);
 app.use('/events', events_route);
@@ -26,14 +28,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   })
 });
 
-app.listen(6000, () => {
+app.listen(3000, () => {
   console.log(`Server is running on port ${process.env.SERVER_PORT}`)
 })
 
 // const mail = express();
 
-// mail.listen(6001, async () => {
-//   console.log("Node mailer is running on port 6001");
+// mail.listen(3001, async () => {
+//   console.log("Node mailer is running on port 3001");
   
 //   const checkDB = async () => {
 //     cron.schedule('*/5 * * * * * ', async () => {

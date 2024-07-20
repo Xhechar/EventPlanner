@@ -1,49 +1,40 @@
-interface User {
+export interface User {
   user_id: string;
-  full_name: string;
+  fullname: string;
   phone_number: string;
   email: string;
   country: string;
-  profile_image:string,
   address: string;
-  isManager: boolean;
-  date_created: Date;
+  profile_image: string;
+  password: string;
   role: string;
-  activity: string;
-  booked_events_id: string[];
 }
 
-interface Events {
-  user_id: string;
+export interface Events {
   event_id: string;
+  user_id: string;
   event_name: string;
-  short_description: string;
-  long_description: string;
+  short_desc: string;
+  long_desc: string;
   location: string;
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
   images: string[];
-  booking_price: number;
-  booking_deadline_date: Date;
-  category: string;
-  ticket_type: string;
-  no_of_tickets_available: number;
-  price_per_group: number;
-  event_status: string;
-  isApproved: boolean;
+  singles: number;
+  couple: number;
+  groups: number;
+  no_of_tickets: number;
+  booking_deadline: string;
 }
 
-
-interface Booking {
-  booking_id: string;
-  user_id: string;
+export interface Book {
+  book_id: string;
   event_id: string;
-  images: string[];
-  event_name: string;
+  user_id: string;
   ticket_type: string;
-  book_status: string;
-  isCanceled: boolean;
-  dateCreated: Date;
-  price_paid: number;
 }
 
+export interface Logins {
+  email: string;
+  password: string;
+}

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Book, Events, User } from '../intefaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,11 @@ export class BookingsService {
 
   constructor(private http: HttpClient) { }
 
-  createBooking(event_id: string, booking: Booking) {
+  createBooking(event_id: string, booking: Book) {
     return this.http.post<{error?: string, message?: string}>(`${this.baseURL}/create-booking/${event_id}`, booking, {headers: this.token_headers})
   }
-  //confirm whether its the event id or book id
-  updateBooking(event_id: string, booking: Booking) {
+  
+  updateBooking(event_id: string, booking: Book) {
     return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/update-booking/${event_id}`, booking, {headers: this.token_headers})
   }
 
@@ -25,7 +26,7 @@ export class BookingsService {
   }
 
   getAttendeeBookingHistory() {
-    return this.http.get<{error?: string, message?: string, events?: Events[], bookings?: Booking[]}>(`${this.baseURL}/get-attendee-booking-history`)
+    return this.http.get<{error?: string, message?: string, events?: Events[], bookings?: Book[]}>(`${this.baseURL}/get-attendee-booking-history`)
   }
 
   getEventUsersBookingHistory() {

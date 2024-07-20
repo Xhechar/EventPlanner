@@ -6,6 +6,22 @@
   justify-content: center;
 }
 
+.errorMsg, .successMsg {
+  position: fixed;
+  top: 8vh;
+  width: 40vw;
+  height: 8vh;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 2px;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+}
+
 .container {
   width: 70%;
   height: 60%;

@@ -1,4 +1,10 @@
 <div class="entire-contents">
+  <div class="errorMsg" *ngIf="error" [style]="styles">
+    <p>{{error}}</p>
+  </div>
+  <div class="successMsg" *ngIf="success" [style]="styles">
+    <p>{{success}}</p>
+  </div>
   <div class="container">
     <div class="image-placeholder">
       <div class="dark">
@@ -6,7 +12,7 @@
       </div>
     </div>
     <div class="form-container">
-        <form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)">
+        <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm.value)">
             <h2>Login</h2>
             <div class="form-group">
               <label for="login-email">Email</label>

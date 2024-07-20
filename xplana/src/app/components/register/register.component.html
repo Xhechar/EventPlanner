@@ -1,4 +1,10 @@
 <div class="entire-contents">
+  <div class="errorMsg" *ngIf="error" [style]="styles">
+    <p>{{error}}</p>
+  </div>
+  <div class="successMsg" *ngIf="success">
+    <p>{{success}}</p>
+  </div>
   <div class="middle-contents">
     <div class="left">
       <div class="dark-background">
@@ -12,128 +18,83 @@
         <p>Your one-stop solution for events browsing, managing and booking</p>
 
       </div>
-      <form #registerForm="ngForm" (ngSubmit)="registerUser(registerForm.value)">
+      <form [formGroup]="registerUserForm">
         <div class="name">
           <label for="">Full Name: </label>
           <div class="input-and-error">
-            <input type="text" name="fullname" ngModel #name="ngModel" required minlength="5">
-            <div class="error" *ngIf="(name.invalid && (name.touched || name.dirty))">
-              <div class="err" *ngIf="name.hasError('required')">
-                <p>name number is required</p>
-              </div>
-              <div class="err" *ngIf="name.hasError('minlength')">
-                <p>name number should not contain less than 5 characters</p>
-              </div>
+            <input type="text" formControlName="fullname">
+            <div class="error">
+
             </div>
           </div>
         </div>
         <div class="name">
           <label for="">Phone Number:</label>
           <div class="input-and-error">
-            <input type="phone" name="phone_number" ngModel required #phone="ngModel" minlength="10" maxlength="10">
-            <div class="error" *ngIf="(phone.invalid && (phone.touched || phone.dirty))">
-              <div class="err" *ngIf="phone.hasError('required')">
-                <p>phone number is required</p>
-              </div>
-              <div class="err" *ngIf="phone.hasError('minlength')">
-                <p>Phone number should contain upto 10 characters</p>
-              </div>
-              <div class="err" *ngIf="phone.hasError('maxlength')">
-                <p>Phone number should not be more than 10 characters</p>
-              </div>
+            <input type="phone" formControlName="phone_number">
+            <div class="error">
             </div>
           </div>
         </div>
         <div class="name">
           <label for="">Email: </label>
           <div class="input-and-error">
-            <input type="email" name="email" #email="ngModel" ngModel email required>
-            <div class="error" *ngIf="(email.invalid && (email.touched || email.dirty))">
-              <div class="err" *ngIf="email.hasError('required')">
-                <p>email number is required</p>
-              </div>
-              <div class="err" *ngIf="email.hasError('email')">
-                <p>email not valid yet</p>
-              </div>
+            <input type="email" formControlName="email">
+            <div class="error">
             </div>
           </div>
         </div>
         <div class="name">
           <label for="">Country Of Residence:</label>
           <div class="input-and-error">
-            <input type="country" name="country" ngModel #country="ngModel" required minlength="3">
-            <div class="error" *ngIf="(country.invalid && (country.touched || country.dirty))">
-              <div class="err" *ngIf="country.hasError('required')">
-                <p>country identity is required</p>
-              </div>
-              <div class="err" *ngIf="country.hasError('minlength')">
-                <p>country number should not contain less than 3characters</p>
-              </div>
+            <input type="country" formControlName="country">
+            <div class="error">
             </div>
           </div>
         </div>
         <div class="name">
           <label for="">Address: </label>
           <div class="input-and-error">
-            <input type="address" name="address" #address="ngModel" ngModel minlength="3">
-            <div class="error" *ngIf="(address.invalid && (address.touched || address.dirty))">
-              <div class="err" *ngIf="address.hasError('required')">
-                <p>address is required</p>
-              </div>
-              <div class="err" *ngIf="address.hasError('minlength')">
-                <p>address should not contain less than 3 characters</p>
-              </div>
+            <input type="address" formControlName="address">
+            <div class="error">
             </div>
           </div>
         </div>
         <div class="name">
           <label for="">Profile Photo: </label>
           <div class="input-and-error">
-            <input type="file" name="photo" #photo="ngModel" ngModel required>
-            <div class="error" *ngIf="(photo.invalid && (photo.touched || photo.dirty))">
-              <div class="err" *ngIf="photo.hasError('required')">
-                <p>profile photo is required</p>
-              </div>
+            <input type="file" (change)="setProfilePhoto($event)">
+            <div class="loader" *ngIf="show"></div>
+            <div class="error">
             </div>
           </div>
         </div>
         <div class="name">
           <label for="">Password: </label>
           <div class="input-and-error">
-            <input type="password" name="password" required ngModel #password="ngModel" minlength="8">
-            <div class="error" *ngIf="(password.invalid && (password.touched || password.dirty))">
-              <div class="err" *ngIf="password.hasError('required')">
-                <p>password is required</p>
-              </div>
-              <div class="err" *ngIf="password.hasError('minlength')">
-                <p>password should not contain less than 8 characters</p>
-              </div>
+            <input type="password" formControlName="password">
+            <div class="error">
             </div>
           </div>
         </div>
         <div class="name">
           <label for="">Confirm Password: </label>
           <div class="input-and-error">
-            <input type="password" name="confirm_password" required minlength="8" #confirm_password="ngModel" ngModel>
-            <div class="error" *ngIf="(confirm_password.invalid && (confirm_password.touched || confirm_password.dirty))">
-              <div class="err" *ngIf="confirm_password.hasError('required')">
-                <p>confirm password is required</p>
-              </div>
-              <div class="err" *ngIf="confirm_password.hasError('minlength')">
-                <p style="margin: auto;">confirm password should be equal to password</p>
-              </div>
+            <input type="password" formControlName="confirm_password">
+            <div class="error">
             </div>
           </div>
         </div>
         <div class="name">
           <label for="">Register As:</label>
-          <select name="role">
-            <option value="attendee">Attendee</option>
-            <option value="manager">Manager</option>
+          <select formControlName="role">
+            <option value="">Select Role</option>
+            <option value="attendee">attendee</option>
+            <option value="manager">manager</option>
           </select>
         </div>
         <div class="button-holder">
-          <button type="submit" [disabled]="registerForm.invalid">Register</button>
+          <button type="submit" [disabled]="false">Register</button>
         </div>
         <p>Already Registered? <a routerLink="/login">Login</a></p>
       </form>
