@@ -240,7 +240,18 @@ export class EventService {
     }
   }
 
-  async deleteEvent(event_id: string) {
+  async deleteEvent(user_id: string, event_id: string) {
+    
+    let userExists = (
+      await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0 AND isManager = 1`)
+    ).recordset;
+
+    if (lodash.isEmpty(userExists)) {
+      return {
+        error: "This activity is not authorised, contact event manager.",
+      };
+    }
+
     let eventExists = (
       await Helper.query(`select * from events where event_id = '${event_id}'`)
     ).recordset;

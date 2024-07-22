@@ -8,7 +8,8 @@ import { Logins, User } from '../intefaces/interfaces';
 export class UsersService {
   baseURL = 'http://localhost:3000/users';
   token_headers = new HttpHeaders({
-    'Authorisation': `Bearer ${localStorage.getItem('token') as string}`
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token') as string}`
   });
 
   constructor(private http: HttpClient) { }

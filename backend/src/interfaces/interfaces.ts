@@ -7,6 +7,7 @@ export interface User {
   address: string,
   profile_image: string,
   password: string,
+  createdAt: string,
   role: string
 }
 
@@ -24,7 +25,10 @@ export interface Events {
   couple: number,
   groups: number,
   no_of_tickets: number,
-  booking_deadline: string
+  booked_tickets: number,
+  remaining_tickets: number,
+  booking_deadline: string,
+  event_status: string
 }
 
 export interface Book {

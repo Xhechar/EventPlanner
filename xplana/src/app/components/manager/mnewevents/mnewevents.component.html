@@ -1,34 +1,133 @@
 <div class="dashboard">
+
+  <div class="errorMsg" *ngIf="error" [style]="styles">
+    <p>{{error}}</p>
+  </div>
+  <div class="errorMsg" *ngIf="successmsg" [style]="styles">
+    <p>{{successmsg}}</p>
+  </div>
+
   <div class="time-display">
     <div class="today">
       <h2>Today</h2>
       <img style="width: 30px" src="/icons/down.png" alt="" />
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p>Wednesday, 10 July 2024</p>
   </div>
 
-  <button class="new-event">New Event</button>
+  <button class="new-event" (click)="changeFormFlex()">New Event</button>
 
   <div class="grid-header">
     <div class="header-item">Event Name</div>
-    <div class="header-item">Date Created</div>
+    <div class="header-item">Start Date</div>
     <div class="header-item">Total Earned</div>
     <div class="header-item">Status</div>
     <div class="header-item">Actions</div>
   </div>
 
-  <div class="event-item">
-    <div class="event-title">
-      <span class="event-number">1.</span>
-      <img src="/events/wedding.jpg" alt="Event Image" />
-      <span class="event-name">Pre wedding excursion</span>
-    </div>
-    <div class="item-date">Friday, 5 July 2024 2100 hrs</div>
-    <div class="item-earned">Ksh. 12,000.50</div>
-    <div class="item-status approved">Approved</div>
-    <div class="item-actions">
-      <button class="action-btn view">View</button>
-      <button class="action-btn delete">Delete</button>
+  <div class="dynamic-display">
+    <div class="event-item" *ngFor="let event of events; let i = index">
+      <div class="event-title">
+        <span class="event-number">{{i + 1}}</span>
+        <img [src]="event.images" [alt]="event.event_name" />
+        <span class="event-name">{{event.event_name}}</span>
+      </div>
+      <div class="item-date">{{event.start_date | date}}</div>
+      <div class="item-earned">Ksh. {{(event.booked_tickets * event.singles) | currency}}</div>
+      <div class="item-status approved" *ngIf="event.event_status == 'pending'" style="color: rgb(238, 142, 63);">{{event.event_status}}</div>
+      <div class="item-status approved" *ngIf="event.event_status == 'approved'" style="color: rgb(38, 199, 38);">{{event.event_status}}</div>
+      <div class="item-actions">
+        <button class="action-btn view" (click)="updateEvent(event.event_id)">Update</button>
+        <button (click)="deleteSelectedEvent(event.event_id)" class="action-btn delete">Delete</button>
+      </div>
     </div>
   </div>
+
+  <div class="entire-contents" [style]="style">
+    <form [formGroup]="createEventForm" (ngSubmit)="createNewEvent()" >
+      <div class="inside-form">
+        <div class="dark">
+          <h1>Feel At Home With xPlanner</h1>
+          <h4>Create Colourfull Events With us</h4>
+        </div>
+      </div>
+  
+      <div class="inputs">
+        <div class="left">
+          <div class="detail">
+            <label for="name">Event Name</label>
+            <input type="name" placeholder="eventname" formControlName="event_name">
+          </div>
+  
+          <div class="detail">
+            <label for="name">Location</label>
+            <input type="text" placeholder="location" formControlName="location">
+          </div>
+  
+          <div class="detail">
+            <label for="name">Start Date</label>
+            <input type="date" formControlName="start_date">
+          </div>
+          
+          <div class="detail">
+            <label for="name">End Date</label>
+            <input type="date" formControlName="end_date">
+          </div>
+          
+          <div class="textarea">
+            <div class="text">
+              <label for="sort_desc">Short Description</label>
+              <textarea class="text1" formControlName="short_desc" placeholder="simpler details on event"></textarea>
+            </div>
+            
+            <div class="text">
+              <label for="sort_desc">Long Description</label>
+              <textarea type="text" formControlName="long_desc" placeholder="elaborated description about event"></textarea>
+            </div>
+          </div>
+        </div>
+          
+        <div class="right">
+          <div class="right-items" style="position: relative;">
+            <label for="name">Images</label>
+            <input type="file" (change)="getEventImages($event)">
+            <div class="loader" *ngIf="show"></div>
+          </div>
+          
+          <div class="right-items">
+            <label for="name">Booking Deadline Date</label>
+            <input type="date" formControlName="booking_deadline">
+          </div>
+          
+          <div class="right-items">
+            <label for="name">Book Price (per person*)</label>
+            <input type="number" formControlName="singles" placeholder="0.00">
+          </div>
+          
+          <div class="right-items">
+            <label for="name">Couple Price (optional*)</label>
+            <input type="number" formControlName="couple" placeholder="0.00">
+          </div>
+          
+          <div class="right-items">
+            <label for="name">Price Per Group of five (optional*)</label>
+            <input type="number" formControlName="groups" placeholder="0.00">
+          </div>
+          
+          <div class="right-items">
+            <label for="name">Number Of Tickets Available</label>
+            <input type="number" formControlName="no_of_tickets" placeholder="0">
+          </div>
+        </div>
+  
+      </div>
+      <div class="button-container">
+        <button class="Cancel" type="button" (click)="changeFormNone()">Cancel</button>
+        <input class="create" type="submit" [value]="buttonValue">
+      </div>
+    </form>
+  </div>
+  
+  
 </div>
+

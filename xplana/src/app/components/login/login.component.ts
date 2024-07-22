@@ -46,14 +46,15 @@ export class LoginComponent {
           this.success = '';
           this.styles = {};
 
+          localStorage.setItem('token', res.token as string);
           if (res.role == 'admin') {
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/admin/a-dashboard']);
           }
           else if (res.role == 'attendee') {
-            this.router.navigate(['/attendee']);
+            this.router.navigate(['/attendee/events']);
           }
           else if (res.role == 'manager') {
-            this.router.navigate(['/manager']);
+            this.router.navigate(['/manager/m-dashboard']);
           }
         }, 3000);
       }

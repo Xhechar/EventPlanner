@@ -109,6 +109,24 @@ export class EventsController {
 
   }
 
+  async getEventByUserId(req: Request, res: Response) {
+    try {
+      let user_id = getIdFromToken(req);
+
+      if (!user_id) {
+        return res.status(501).json({
+          error: "Could not get id from token headers"
+        })
+      }
+
+      let response = await event_service.getEventByUserId(user_id);
+
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.json({error})
+    }
+  }
+
   async getAllEvents(req: Request, res: Response) {
 
     try {
@@ -138,10 +156,15 @@ export class EventsController {
   async deleteEvent(req: Request, res: Response) {
 
     try {
-      console.log(req.params.event_id);
-      
+      let user_id = getIdFromToken(req);
 
-      let response = await event_service.deleteEvent(req.params.event_id);
+      if (!user_id) {
+        return res.status(501).json({
+          error: "Could not get id from token headers"
+        })
+      }
+
+      let response = await event_service.deleteEvent(user_id, req.params.event_id);
 
       return res.status(201).json(response);
     } catch (error) {

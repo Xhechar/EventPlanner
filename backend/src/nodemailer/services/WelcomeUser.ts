@@ -12,6 +12,9 @@ export const welcomeUser = async () => {
   
   let users = (await Helper.query('select * from users where isWelcomed = 0')).recordset;
 
+  console.log(users);
+  
+
   if (lodash.isEmpty(users)) {
     console.log("All users have been welcomed successfully")
   }

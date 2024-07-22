@@ -18,7 +18,7 @@
         <p>Your one-stop solution for events browsing, managing and booking</p>
 
       </div>
-      <form [formGroup]="registerUserForm">
+      <form [formGroup]="registerUserForm" (ngSubmit)="registerUser()">
         <div class="name">
           <label for="">Full Name: </label>
           <div class="input-and-error">
@@ -62,7 +62,7 @@
         </div>
         <div class="name">
           <label for="">Profile Photo: </label>
-          <div class="input-and-error">
+          <div class="input-and-error" style="position: relative;">
             <input type="file" (change)="setProfilePhoto($event)">
             <div class="loader" *ngIf="show"></div>
             <div class="error">
@@ -73,7 +73,8 @@
           <label for="">Password: </label>
           <div class="input-and-error">
             <input type="password" formControlName="password">
-            <div class="error">
+            <div class="error" *ngIf="registerUserForm.get('password')?.invalid && (registerUserForm.get('password')?.touched || registerUserForm.get('password')?.dirty)">
+              <p>Password must contain atleast one uppercase, lowercase letters and numbers</p>
             </div>
           </div>
         </div>

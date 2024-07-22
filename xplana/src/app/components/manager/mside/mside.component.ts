@@ -10,4 +10,10 @@ import { RouterLink } from '@angular/router';
 })
 export class MsideComponent {
 
+  clearLocalStorage() {
+    setTimeout(() => {
+      localStorage.clear();
+    }, 3000)
+  }
+
 }

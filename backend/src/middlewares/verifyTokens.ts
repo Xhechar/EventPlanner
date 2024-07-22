@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { TokenInfo } from '../interfaces/interfaces';
-import jwt, { decode } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { TokenInfo } from '../interfaces/interfaces';
 
 dotenv.config();
 
@@ -10,47 +10,39 @@ export interface extendedRequest extends Request {
 }
 
 export const verifyTokens = (req: extendedRequest, res: Response, next: NextFunction) => {
-
   try {
+    const authHeader = req.headers['authorization'];
 
-    let token = req.headers['token'] as string;
-
-    if (!token) {
+    if (!authHeader) {
       return res.status(401).json({
         error: "You do not have access, to use this service"
-      })
+      });
     }
-    else {
 
-      jwt.verify(token, process.env.SECRET_KEY as string, (err, data) => {
-        if(err) {
-          if (err.name == "TokenExpiredError") {
-            return res.status(401).json({
-              error: "Your session has expired, please log in again"
-            })
-          }
-          else if (err.name == "JsonWebTokenError") {
-            return res.status(401).json({
-              error: "Invalid token, please log in again"
-            })
-          }
-          else {
-            return res.status(501).json({
-              error: "An error occurred while verifying the token"
-            })
-          }
+    const token = authHeader.split(' ')[1];
+
+    jwt.verify(token, process.env.SECRET_KEY as string, (err, data) => {
+      if (err) {
+        if (err.name === "TokenExpiredError") {
+          return res.status(401).json({
+            error: "Your session has expired, please log in again"
+          });
+        } else if (err.name === "JsonWebTokenError") {
+          return res.status(401).json({
+            error: "Invalid token, please log in again"
+          });
+        } else {
+          return res.status(501).json({
+            error: "An error occurred while verifying the token"
+          });
         }
-        req.info = data as TokenInfo;
-      })
-
-    }
-
-  }
-  catch (error) {
+      }
+      req.info = data as TokenInfo;
+      next();
+    });
+  } catch (error) {
     return res.status(501).json({
-      error: error
-    })
+      error: "An error occurred while processing your request"
+    });
   }
-
-  next();
-}
+};
