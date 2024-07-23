@@ -26,6 +26,7 @@ import { ManagersComponent } from './components/admin/managers/managers.componen
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EventformComponent } from './components/eventform/eventform.component';
+import { MdashboardSingleEventComponent } from './components/mdashboard-single-event/mdashboard-single-event.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,7 +53,8 @@ export const routes: Routes = [
       { path: 'm-events', component: MeventsComponent },
       { path: 'm-new-events', component: MneweventsComponent },
       { path: 'm-notifications', component: MnotificationsComponent },
-      {path: 'm-profile', component: MprofileComponent}
+      { path: 'm-profile', component: MprofileComponent },
+      {path: 'single-event-stats/:event_id', component: MdashboardSingleEventComponent}
   ]},
   {
     path: 'admin', component: AdminComponent, children: [

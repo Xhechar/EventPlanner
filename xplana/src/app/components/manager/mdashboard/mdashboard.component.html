@@ -4,21 +4,21 @@
       <h2>Today</h2>
       <img style="width: 30px;" src="/icons/down.png" alt="">
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(59, 58, 58); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
   </div>
-  <div class="stats">
+  <div class="stats" *ngIf="events">
     <div class="stat-item">
       <p>Total Created Events</p>
-      <h2>4</h2>
-      <span>+1</span>
+      <h2>{{events.length}}</h2>
+      <span>+{{pendingEvents}}</span>
     </div>
     <div class="stat-item1">
       <p>Approved Events</p>
-      <h2>6</h2>
+      <h2>{{approvedEvents}}</h2>
     </div>
     <div class="stat-item2">
       <p>Pending Events</p>
-      <h2>2</h2>
+      <h2>{{pendingEvents}}</h2>
     </div>
     <div class="stat-item3">
       <p>Total Hosted Users</p>
@@ -33,49 +33,22 @@
       <div class="event-action"><h3>Action</h3></div>
     </div>
 
-    <div class="event-item">
+    <div class="event-item" *ngFor="let event of events; let i = index">
       <div class="event-title">
-        <span class="event-number">1.</span>
-        <img src="/events/wedding.jpg" alt="Event Image">
-        <span class="event-name">Pre wedding excursion</span>
+        <span class="event-number">{{i + 1}}.</span>
+        <img [src]="event.images" [alt]="event.event_name">
+        <span class="event-name">{{event.event_name}}</span>
       </div>
-      <div class="event-status">
-          <span class="status approved">Approved</span>
+      <div class="status">
+          <div class="event-status" *ngIf="event.event_status == 'approved'">
+            <span class="statusapproved" style="color: green; font-weight: 500;">{{event.event_status}}</span>
+        </div>
+        <div class="event-status" *ngIf="event.event_status == 'pending'">
+          <span class="statusapproved" style="color: green; font-weight: 500;">{{event.event_status}}</span>
+        </div>
       </div>
       <div class="event-action">
-          <button class="check-event">
-            <img src="/icons/searchevent.png" alt="">
-            <p>Check Event</p>
-          </button>
-      </div>
-    </div>
-    <div class="event-item">
-      <div class="event-title">
-        <span class="event-number">2.</span>
-        <img src="/events/beach party.jpg" alt="Event Image">
-        <span class="event-name">Beach Party</span>
-      </div>
-      <div class="event-status">
-          <span class="status pending">Pending</span>
-      </div>
-      <div class="event-action">
-          <button class="check-event">
-            <img src="/icons/searchevent.png" alt="">
-            <p>Check Event</p>
-          </button>
-      </div>
-    </div>
-    <div class="event-item">
-      <div class="event-title">
-        <span class="event-number">3.</span>
-        <img src="/events/conference meet up.jpg" alt="Event Image">
-        <span class="event-name">Conference meeting</span>
-      </div>
-      <div class="event-status">
-          <span class="status approved">Approved</span>
-      </div>
-      <div class="event-action">
-          <button class="check-event">
+          <button class="check-event" (click)="checkEvent(event.event_id)">
             <img src="/icons/searchevent.png" alt="">
             <p>Check Event</p>
           </button>

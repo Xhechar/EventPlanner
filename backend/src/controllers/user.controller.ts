@@ -152,4 +152,14 @@ export class UserController {
       return res.json({ error });
     }
   }
+
+  async getUsersByEventId(req: Request, res: Response) {
+    try {
+      let response = await user_service.getUsersByEventId(req.params.event_id);
+
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.json({ error });
+    }
+  }
 }

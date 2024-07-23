@@ -60,7 +60,9 @@ export class UserService {
 
   async updateUser(user_id: string, user: User) {
     let userExists = (
-      await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0`)
+      await Helper.query(
+        `select * from users where user_id = '${user_id}' AND isDeleted = 0`
+      )
     ).recordset;
 
     if (userExists.length == 0) {
@@ -93,7 +95,8 @@ export class UserService {
   }
 
   async getAllUsers() {
-    let result = (await Helper.query("select * from users where isDeleted = 0")).recordset;
+    let result = (await Helper.query("select * from users where isDeleted = 0"))
+      .recordset;
 
     if (lodash.isEmpty(result)) {
       return {
@@ -102,14 +105,16 @@ export class UserService {
     } else {
       return {
         message: "Users successfully retrieved",
-        users: result as User[]
+        users: result as User[],
       };
     }
   }
 
   async getUserById(user_id: string) {
     let result = (
-      await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0`)
+      await Helper.query(
+        `select * from users where user_id = '${user_id}' AND isDeleted = 0`
+      )
     ).recordset;
 
     if (lodash.isEmpty(result)) {
@@ -119,14 +124,16 @@ export class UserService {
     } else {
       return {
         message: "User successfully retrieved",
-        user: result as User[]
+        user: result as User[],
       };
     }
   }
 
   async getUserByRole() {
     let result = (
-      await Helper.query("select * from users where role = 'manager' AND isDeleted = 0")
+      await Helper.query(
+        "select * from users where role = 'manager' AND isDeleted = 0"
+      )
     ).recordset;
 
     if (lodash.isEmpty(result)) {
@@ -136,7 +143,7 @@ export class UserService {
     } else {
       return {
         message: "Successfully retrieved users for managerial previllages",
-        users: result as User[]
+        users: result as User[],
       };
     }
   }
@@ -146,42 +153,36 @@ export class UserService {
   async getUsersByEventId(event_id: string) {
     let requiredUsers: string[] = [];
     let returnedUsers: User[] = [];
+    let bookings: Book[] = [];
 
-    let eventUsers: Book[] = (
-      await Helper.query(
-        `select * from bookings where event_id = '${event_id}'`
-      )
+    let bookedUsers: Book[] = (
+      await Helper.query(`select * from bookings where event_id = '${event_id}'`)
     ).recordset;
 
-    if (lodash.isEmpty(eventUsers)) {
+    if (lodash.isEmpty(bookedUsers)) {
       return {
-        error: "No booked users currently available for this event",
+        error: "Event not yet booked",
       };
     } else {
-      for (let eventUser of eventUsers) {
-        requiredUsers.push(eventUser.user_id);
+      for (let bookedUser of bookedUsers) {
+        requiredUsers.push(bookedUser.user_id);
+        bookings.push(bookedUser);
       }
 
-      for (let requiredUser of requiredUsers) {
-        let result = this.getUserById(requiredUser);
-
-        let singleUser: User[] = (await result).user as User[];
-
-        if (!lodash.isEmpty(singleUser)) {
-          returnedUsers.push(singleUser[0]);
+      if (requiredUsers.length > 0) {
+        for (let requiredUser of requiredUsers) {
+          console.log(requiredUser);
+          let result = (await Helper.query(`select * from users where user_id = '${requiredUser}' and isDeleted = 0`)).recordset as User[];
+          if (result) {
+            returnedUsers.push(result[0]);
+          }
         }
       }
-
-      if (returnedUsers.length == 0) {
-        return {
-          error: "Error fetching users of the specified event",
-        };
-      } else {
-        return {
-          message: "Users for this event successfully retrieved",
-          users: returnedUsers,
-        };
-      }
+      return {
+        message: "Users successfully fetched",
+        users: returnedUsers,
+        bookings: bookings
+      };
     }
   }
 
@@ -242,7 +243,9 @@ export class UserService {
 
   async softDeleteUser(user_id: string) {
     let userExists = (
-      await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0`)
+      await Helper.query(
+        `select * from users where user_id = '${user_id}' AND isDeleted = 0`
+      )
     ).recordset;
 
     if (userExists.length == 0) {

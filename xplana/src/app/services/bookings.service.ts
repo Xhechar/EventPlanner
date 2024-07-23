@@ -8,6 +8,7 @@ import { Book, Events, User } from '../intefaces/interfaces';
 export class BookingsService {
   baseURL = 'http://localhost:3000/bookings';
   token_headers = new HttpHeaders({
+    'Content-Type': 'application/json',
     'Authorisation': `Bearer ${localStorage.getItem('token') as string}`
   });
 

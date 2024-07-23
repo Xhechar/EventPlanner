@@ -33,6 +33,10 @@ export class MprofileComponent {
   profile_image: string = '';
   show = false;
 
+  style = {
+    'display': 'none'
+  }
+
   updateUserForm!: FormGroup;
 
   constructor(private userService: UsersService, private fb: FormBuilder) {
@@ -45,6 +49,9 @@ export class MprofileComponent {
       profile_image: ['', [Validators.required]],
       role: ['', [Validators.required]]
     });
+  }
+
+  ngOnInit() {
     this.getUserProfile();
   }
 
@@ -68,6 +75,35 @@ export class MprofileComponent {
     })
   }
 
+  toggleForm() {
+    if (this.style.display === 'none') {
+      this.style.display = 'flex';
+
+      this.getUserProfile();
+      this.updateUserForm.setValue({
+        fullname: this.profile.fullname,
+        phone_number: this.profile.phone_number,
+        email: this.profile.email,
+        country: this.profile.country,
+        address: this.profile.address,
+        profile_image: this.profile.profile_image,
+        role: this.profile.role
+      });
+    } else {
+      this.style.display = 'none';
+
+      this.updateUserForm.setValue({
+        fullname: ['',],
+      phone_number: ['',],
+      email: ['',],
+      country: ['',],
+      address: ['',],
+      profile_image: ['',],
+      role: ['',]
+      })
+    }
+  }
+
   getUserProfile() {
     this.userService.getSingleUserById().subscribe(res => {
       let profile_array = res.user as User[];
@@ -75,6 +111,48 @@ export class MprofileComponent {
     })
   }
 
-  updateUser() {}
+  updateUser() {
+    this.userService.updateUser(this.updateUserForm.value).subscribe(res => {
+      if (res.error) {
+        this.error = res.error;
+        this.styles = {
+          'background-color': 'rgb(190, 17, 17)',
+          'display': 'flex'
+        }
+
+        setTimeout(() => {
+          this.error = '';
+          this.styles = {};
+        }, 3000);
+      }
+      else if (res.message) {
+        this.success = res.message;
+        this.styles = {
+          'background-color': 'rgb(24, 179, 14)',
+          'display': 'flex'
+        }
+        this.toggleForm();
+        this.profile = {
+          user_id: '',
+          fullname: '',
+          phone_number: '',
+          email: '',
+          country: '',
+          address: '',
+          profile_image: '',
+          password: '',
+          createdAt: '',
+          role: '',
+        };
+        this.getUserProfile();
+
+        setTimeout(() => {
+          this.success = '';
+          this.styles = {};
+        }, 3000);
+      }
+
+    })
+  }
 
 }

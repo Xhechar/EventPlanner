@@ -1,0 +1,65 @@
+<div class="dashboard">
+  <div class="time-display">
+    <button routerLink="/manager/m-dashboard" style="height: 5vh; width: 10%; margin: 5px;">Back</button>
+    <div class="today">
+      <h2>Today</h2>
+      <img style="width: 30px;" src="/icons/down.png" alt="">
+    </div>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(59, 58, 58); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
+  </div>
+  <div class="stats">
+    <div class="stat-item">
+      <p>Total Tickets</p>
+      <h2>50</h2>
+      <span>-pendingEvents</span>
+    </div>
+    <div class="stat-item1">
+      <p>Booked Tickets</p>
+      <h2>16</h2>
+    </div>
+    <div class="stat-item2">
+      <p>Remaining Tickets</p>
+      <h2>34</h2>
+    </div>
+    <div class="stat-item3">
+      <p>Approved Attendees</p>
+      <h2>12</h2>
+    </div>
+    <div class="stat-item">
+      <p>Total Earnings</p>
+      <h2>ksh. 14,869.02</h2>
+    </div>
+  </div>
+  
+  <div class="details">
+    <h2>Attendees History</h2>
+    <div class="grid-header">
+      <div class="header-item">User</div>
+      <div class="header-item">Email</div>
+      <div class="header-item">Ticket Type</div>
+      <div class="header-item">Date Booked</div>
+      <div class="header-item">Actions</div>
+    </div>
+
+    <div class="users" *ngIf="!users">
+      <h1>No Booked Users currently Available</h1>
+    </div>
+    <div class="users" *ngIf="users">
+      <div class="user-item" *ngFor="let user of users, let i = index">
+        <div class="item-user">
+          <img [src]="user.profile_image" [alt]="user.fullname" />
+          <p>{{user.fullname}}</p>
+        </div>
+        <div class="item-email">{{user.email}}</div>
+        <div class="item-event-name">{{bookings[i].ticket_type}}</div>
+        <div class="item-location">{{bookings[i].createdAt | date}}</div>
+        <div class="item-actions">
+          <button style="background-color: rgb(35, 113, 35);">Approve</button>
+          <button style="background-color: rgb(189, 9, 9);">Reject</button>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+</div>

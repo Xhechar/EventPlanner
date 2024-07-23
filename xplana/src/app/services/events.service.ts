@@ -22,7 +22,7 @@ export class EventsService {
   }
 
   updateEventByManager(event_id: string, event: Events) {
-    return this.http.post<{ error?: string, message?: string}>(`${this.baseURL}/update-event/${event_id}`, event, {headers: this.getAuthHeaders()})
+    return this.http.put<{ error?: string, message?: string}>(`${this.baseURL}/update-event/${event_id}`, event, {headers: this.getAuthHeaders()})
   }
 
   getAllEvents() {

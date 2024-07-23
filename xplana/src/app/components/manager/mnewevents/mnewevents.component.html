@@ -12,7 +12,7 @@
       <h2>Today</h2>
       <img style="width: 30px" src="/icons/down.png" alt="" />
     </div>
-    <p>Wednesday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(59, 58, 58); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
   </div>
 
   <button class="new-event" (click)="changeFormFlex()">New Event</button>
@@ -37,14 +37,14 @@
       <div class="item-status approved" *ngIf="event.event_status == 'pending'" style="color: rgb(238, 142, 63);">{{event.event_status}}</div>
       <div class="item-status approved" *ngIf="event.event_status == 'approved'" style="color: rgb(38, 199, 38);">{{event.event_status}}</div>
       <div class="item-actions">
-        <button class="action-btn view" (click)="updateEvent(event.event_id)">Update</button>
+        <button class="action-btn view" (click)="setEventId(event.event_id)">Update</button>
         <button (click)="deleteSelectedEvent(event.event_id)" class="action-btn delete">Delete</button>
       </div>
     </div>
   </div>
 
   <div class="entire-contents" [style]="style">
-    <form [formGroup]="createEventForm" (ngSubmit)="createNewEvent()" >
+    <form [formGroup]="createEventForm" (ngSubmit)="create_or_update('...')" >
       <div class="inside-form">
         <div class="dark">
           <h1>Feel At Home With xPlanner</h1>

@@ -15,4 +15,5 @@ userRoute.put('/update-role-by-admin/:user_id', verifyTokens, user_contoller.upd
 userRoute.put('/update-all-user-roles', verifyTokens, user_contoller.updateAllUsersRoleByAdmin);
 userRoute.put('/soft-delete-user/:user_id', verifyTokens, user_contoller.softDeleteUser);
 userRoute.put('/retrieve-deleted-user/:user_id', verifyTokens, user_contoller.retrieveDeletedUser);
-userRoute.put('/retrieve-deleted-users', verifyTokens, user_contoller.retrieveAllDeletedUsers)
+userRoute.put('/retrieve-deleted-users', verifyTokens, user_contoller.retrieveAllDeletedUsers);
+userRoute.get('/get-user-by-event-id/:event_id', verifyTokens, user_contoller.getUsersByEventId);

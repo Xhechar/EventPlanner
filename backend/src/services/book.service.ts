@@ -239,7 +239,7 @@ export class BookingService {
     }
   }
 
-  //fetching all the users who have booked a managers event
+  //fetching all the users who have booked a managers event >> Attendee Dashboard
 
   async getEventUsersBookingHistory(manager_id: string) {
     let user_ids: string[] = [];

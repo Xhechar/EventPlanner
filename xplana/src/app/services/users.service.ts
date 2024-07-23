@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Logins, User } from '../intefaces/interfaces';
+import { Book, Logins, User } from '../intefaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +60,9 @@ export class UsersService {
 
   retrieveAllDeletedUsersByAdmin() {
     return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/retrieve-deleted-users`, {headers: this.token_headers})
+  }
+
+  getUsersByEventId(event_id: string) {
+    return this.http.get<{error?: string, message?: string, bookings?: Book[], users?: User[]}>(`${this.baseURL}/get-user-by-event-id/${event_id}`, {headers: this.token_headers})
   }
 }

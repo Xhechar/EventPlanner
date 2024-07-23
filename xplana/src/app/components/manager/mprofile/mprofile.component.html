@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="botton-holder">
-				<button class="update-profile">
+				<button class="update-profile" (click)="toggleForm()">
 					<img src="/icons/updateprofile.png" alt="">
 					<p>Update Profile</p>
 				</button>
@@ -76,20 +76,18 @@
 
 	<!--The update profile form-->
 
-	<div class="entire-div">
+	<div class="entire-div" [ngStyle]="style">
 		<div class="middle-contents">
 			<div class="left">
 				<div class="dark-background">
-					<h1 style="color: white; width: 50%; font-size: 36px; font-weight: 800; line-height: 150%;">Join Us Now, Register</h1>
+					<h1 style="color: white; width: 50%; font-size: 36px; font-weight: 800; line-height: 150%;">Take full control</h1>
 				</div>
 			</div>
 			<div class="right">
 				<div class="title">
-	
-					<h1>Planning With xPlanner</h1>
-					<p>Your one-stop solution for events browsing, managing and booking</p>
-	
+					<h1>Update Your Profile</h1>
 				</div>
+				<!---->
 				<form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
 					<div class="name">
 						<label for="">Full Name: </label>
@@ -149,9 +147,9 @@
 							<option value="manager">manager</option>
 						</select>
 					</div>
-					<div class="button-holder">
-						<button type="submit" [disabled]="false">Cancel</button>
-						<button type="submit" [disabled]="false">Register</button>
+					<div class="button-holder" style="margin-top: 3vh;">
+						<button type="button" (click)="toggleForm()" style="background-color: rgba(255, 0, 0, 0.79);">Cancel</button>
+						<button type="submit" [disabled]="updateUserForm.invalid">Update</button>
 					</div>
 				</form>
 			</div>
