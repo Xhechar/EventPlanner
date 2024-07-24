@@ -36,8 +36,8 @@ export interface Book {
   event_id: string,
   user_id: string,
   ticket_type: string,
-  book_status: string,
-  isCancelled: string,
+  book_status: boolean,
+  isCancelled: boolean,
   createdAt: string
 }
 

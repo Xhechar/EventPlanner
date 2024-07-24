@@ -171,7 +171,6 @@ export class UserService {
 
       if (requiredUsers.length > 0) {
         for (let requiredUser of requiredUsers) {
-          console.log(requiredUser);
           let result = (await Helper.query(`select * from users where user_id = '${requiredUser}' and isDeleted = 0`)).recordset as User[];
           if (result) {
             returnedUsers.push(result[0]);

@@ -110,8 +110,7 @@ h2 {
 .user-item {
   margin-top: 2vh;
   align-items: center;
-  border-bottom: 1px solid #444;
-  border-top: 1px solid #444;
+  border-bottom: 1px dotted #444;
 }
 
 .user-item:hover {
@@ -121,7 +120,7 @@ h2 {
 
 .user-item > div img {
   width: 20%;
-  height: 45px;
+  height: 40px;
   border-radius: 50%;
 }
 

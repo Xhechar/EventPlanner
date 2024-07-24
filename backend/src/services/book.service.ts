@@ -245,9 +245,11 @@ export class BookingService {
     let user_ids: string[] = [];
     let event_ids: string[] = [];
     let fetchedUsers: User[] = [];
+    let requiredBookings: Book[] = [];
+    let requiredEvents: Events[] = [];
 
     let userExists = (
-      await Helper.query(`select * from users where user_id = '${manager_id}' AND isDeleted = 0`)
+      await Helper.query(`select * from users where user_id = '${manager_id}' AND isDeleted = 0 AND isManager = 1`)
     ).recordset;
 
     if (userExists.length == 0) {
@@ -257,7 +259,7 @@ export class BookingService {
     }
 
     let eventsCreated = await event_service.getEventByUserId(manager_id);
-
+  
     if (eventsCreated.error) {
       return {
         error: eventsCreated.error,
@@ -285,42 +287,48 @@ export class BookingService {
             continue;
           }
           else {
-            for (let booking of bookingsAvailable as User[]) {
+            for (let booking of bookingsAvailable as Book[]) {
               user_ids.push(booking.user_id);
+              requiredBookings.push(booking);
+
+              let events = (await Helper.query(`select * from events where event_id = '${booking.event_id}'`)).recordset as Events[];
+              requiredEvents.push(events[0]);
+            }
+          }
+        }
+
+        if (user_ids.length == 0) {
+          return {
+            error: "Unable to display users for this event",
+          };
+        }
+        else {
+          for (let user_id of user_ids) {
+            let retrievedUser = await user_service.getUserById(user_id);
+
+            if(retrievedUser.error) {
+              return {
+                error: "The history of the user does not exist."
+              }
+              break;
+            }
+            else if (retrievedUser.user) {
+              fetchedUsers.push(retrievedUser.user[0] as unknown as User);
             }
           }
 
-          if (user_ids.length == 0) {
+          if (fetchedUsers.length == 0) {
             return {
-              error: "Unable to display users for this event",
+              error: "Unable to display the users retrieved.",
             };
           }
           else {
-            for (let user_id of user_ids) {
-              let retrievedUser = await user_service.getUserById(user_id);
-
-              if(retrievedUser.error) {
-                return {
-                  error: "The history of the user does not exist."
-                }
-                break;
-              }
-              else if (retrievedUser.user) {
-                fetchedUsers.push(retrievedUser.user[0] as unknown as User);
-              }
-            }
-
-            if (fetchedUsers.length == 0) {
-              return {
-                error: "Unable to display the users retrieved.",
-              };
-            }
-            else {
-              return {
-                message: "Users successfully retrieved",
-                users: fetchedUsers,
-              };
-            }
+            return {
+              message: "Users successfully retrieved",
+              users: fetchedUsers,
+              bookings: requiredBookings,
+              events: requiredEvents
+            };
           }
         }
       }

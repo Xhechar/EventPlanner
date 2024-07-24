@@ -39,6 +39,7 @@ export const routes: Routes = [
     component: AttendeeComponent, children: [
       { path: 'profile', component: ProfileComponent },
       { path: 'booking', component: BookingComponent },
+      {path: 'single-event/:event_id', component: SingleComponent},
       {
         path: 'events', component: EventsComponent, children: [
         {path: ':event_id', component: SingleComponent}
@@ -54,7 +55,8 @@ export const routes: Routes = [
       { path: 'm-new-events', component: MneweventsComponent },
       { path: 'm-notifications', component: MnotificationsComponent },
       { path: 'm-profile', component: MprofileComponent },
-      {path: 'single-event-stats/:event_id', component: MdashboardSingleEventComponent}
+      {path: 'single-event-stats/:event_id', component: MdashboardSingleEventComponent},
+      {path: 'm-single-event/:event_id', component: SingleComponent}
   ]},
   {
     path: 'admin', component: AdminComponent, children: [

@@ -7,7 +7,7 @@
 
 .time-display {
   width: 100%;
-  height: 14vh;
+  height: 26vh;
   display: grid;
   grid-template-rows: 1fr 1fr;
   align-items: center;
@@ -273,4 +273,22 @@
 
 .reject-button:hover {
   background-color: #dc3546b6;
+}
+
+.errorMsg, .successMsg {
+  z-index: 3;
+  position: fixed;
+  top: 8vh;
+  left: 30%;
+  width: 40vw;
+  height: 8vh;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 2px;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
 }

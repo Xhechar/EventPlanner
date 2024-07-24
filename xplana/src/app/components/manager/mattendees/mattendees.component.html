@@ -12,20 +12,24 @@
     <div class="grid-header">
       <div class="header-item">User</div>
       <div class="header-item">Email</div>
-      <div class="header-item">Contact</div>
+      <div class="header-item">Event Name</div>
       <div class="header-item">Ticket Type</div>
       <div class="header-item">Price</div>
     </div>
 
-    <div class="user-item">
+    <div class="user-item" *ngFor="let attendee of attendees, let i = index">
       <div class="item-user">
-        <img src="/profile_images/hailey.jpeg" alt="" />
-        <p>Kate Morrison</p>
+        <img [src]="attendee.profile_image" [alt]="attendee.fullname" />
+        <p>{{attendee.fullname}}</p>
       </div>
-      <div class="item-email">katem05&#64;gmail.com</div>
-      <div class="item-event-name">+254712345678</div>
-      <div class="item-location">Single</div>
-      <div class="item-actions">1,950.50</div>
+      <div class="item-email">{{attendee.email}}</div>
+      <div class="item-event-name">{{events[i].event_name}}</div>
+      <div class="item-location">{{bookings[i].ticket_type}}</div>
+      <div class="item-actions">
+        <div class="item-actions1" *ngIf="bookings[i].ticket_type == 'singles'">{{events[i].singles | currency:'Ksh. '}}</div>
+        <div class="item-actions1" *ngIf="bookings[i].ticket_type == 'couple'">{{events[i].couple | currency:'Ksh. '}}</div>
+        <div class="item-actions1" *ngIf="bookings[i].ticket_type == 'groups'">{{events[i].groups | currency:'Ksh. '}}</div>
+      </div>
     </div>
   </div>
 </div>

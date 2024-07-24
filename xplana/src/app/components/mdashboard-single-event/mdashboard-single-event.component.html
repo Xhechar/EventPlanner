@@ -1,6 +1,16 @@
+<div class="errorMsg" *ngIf="error" [style]="styles">
+  <p>{{error}}</p>
+</div>
+<div class="errorMsg" *ngIf="successmsg" [style]="styles">
+  <p>{{successmsg}}</p>
+</div>
+
 <div class="dashboard">
   <div class="time-display">
-    <button routerLink="/manager/m-dashboard" style="height: 5vh; width: 10%; margin: 5px;">Back</button>
+    <button routerLink="/manager/m-dashboard" style="height: 5vh; width: 10%; margin: 5px;"><span style="font-size: 20px;">< </span> Back</button>
+    <div class="event-name" style="width: 100%; height: 8vh; text-align: center;">
+      <h1 style="font-weight: 600;">{{event.event_name}}</h1>
+    </div>
     <div class="today">
       <h2>Today</h2>
       <img style="width: 30px;" src="/icons/down.png" alt="">
@@ -10,29 +20,29 @@
   <div class="stats">
     <div class="stat-item">
       <p>Total Tickets</p>
-      <h2>50</h2>
-      <span>-pendingEvents</span>
+      <h2>{{event.no_of_tickets}}</h2>
+      <span>-{{event.booked_tickets}}</span>
     </div>
     <div class="stat-item1">
       <p>Booked Tickets</p>
-      <h2>16</h2>
+      <h2>{{event.booked_tickets}}</h2>
     </div>
     <div class="stat-item2">
       <p>Remaining Tickets</p>
-      <h2>34</h2>
+      <h2>{{event.remaining_tickets}}</h2>
     </div>
     <div class="stat-item3">
       <p>Approved Attendees</p>
-      <h2>12</h2>
+      <h2>{{approved_attendies}}</h2>
     </div>
     <div class="stat-item">
       <p>Total Earnings</p>
-      <h2>ksh. 14,869.02</h2>
+      <h2>ksh. 869.02</h2>
     </div>
   </div>
   
   <div class="details">
-    <h2>Attendees History</h2>
+    <h2 style="text-decoration: underline; margin-bottom: 2vh;">Attendees History</h2>
     <div class="grid-header">
       <div class="header-item">User</div>
       <div class="header-item">Email</div>
@@ -53,9 +63,11 @@
         <div class="item-email">{{user.email}}</div>
         <div class="item-event-name">{{bookings[i].ticket_type}}</div>
         <div class="item-location">{{bookings[i].createdAt | date}}</div>
-        <div class="item-actions">
-          <button style="background-color: rgb(35, 113, 35);">Approve</button>
-          <button style="background-color: rgb(189, 9, 9);">Reject</button>
+        <div class="item-actions" *ngIf="bookings[i].book_status == false">
+          <button style="background-color: rgb(35, 113, 35);" (click)="updateBookStatus(bookings[i].book_id)">Approve</button>
+        </div>
+        <div class="item-actions" *ngIf="bookings[i].book_status == true">
+          <button style="background-color: rgb(4, 30, 4);" (click)="userAlreadyApproved()">Approved &#09;</button>
         </div>
       </div>
     </div>

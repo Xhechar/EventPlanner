@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventsService } from '../../../services/events.service';
 import { BookingsService } from '../../../services/bookings.service';
-import { Events } from '../../../intefaces/interfaces';
+import { Events, User } from '../../../intefaces/interfaces';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-mdashboard',
@@ -13,6 +14,7 @@ import { Events } from '../../../intefaces/interfaces';
   styleUrl: './mdashboard.component.css'
 })
 export class MdashboardComponent {
+  count: number = 0;
   events: Events[] = [];
   currentDateTime = new Date();
   approvedEvents: number = 0;
@@ -33,13 +35,12 @@ export class MdashboardComponent {
 
   constructor(private router: Router, private eventService: EventsService, private bookService: BookingsService) {
     this.getEventByUserId();
+    this.getTotalUsers();
   }
 
   getEventByUserId() {
     this.eventService.getEventByUserId().subscribe(res => {
       this.events = res.events as Events[];
-      console.log('number of events are', this.events);
-      
 
       for (let event of res.events as Events[]) {
         if (event.event_status === 'approved') {
@@ -53,6 +54,13 @@ export class MdashboardComponent {
 
   checkEvent(event_id: string) {
     this.router.navigate(['/manager/single-event-stats', event_id]);
+  }
+
+  getTotalUsers() {
+    this.bookService.getEventUsersBookingHistory().subscribe(res => {
+      const users = res.users as User[];
+      this.count = users.length;
+    })
   }
 
 }

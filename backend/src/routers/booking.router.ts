@@ -12,3 +12,4 @@ book_route.delete('/delete-booking/:book_id', verifyTokens, book_controller.dele
 book_route.get('/get-attendee-booking-history', verifyTokens, book_controller.getAttendeeBookingHistory);
 book_route.get('/get-managers-booked-events-users', verifyTokens, book_controller.getEventUsersBookingHistory);
 book_route.get('/get-all-bookings', verifyTokens, book_controller.getAllBookings);
+book_route.put('/update-booking-status/:book_id', verifyTokens, book_controller.updateBookStatus);

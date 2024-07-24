@@ -63,6 +63,6 @@ export class UsersService {
   }
 
   getUsersByEventId(event_id: string) {
-    return this.http.get<{error?: string, message?: string, bookings?: Book[], users?: User[]}>(`${this.baseURL}/get-user-by-event-id/${event_id}`, {headers: this.token_headers})
+    return this.http.get<{error?: string, message?: string, bookings?: Book [], users?: User[]}>(`${this.baseURL}/get-user-by-event-id/${event_id}`, {headers: this.token_headers})
   }
 }

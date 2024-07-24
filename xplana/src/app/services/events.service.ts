@@ -8,7 +8,7 @@ import { Events } from '../intefaces/interfaces';
 export class EventsService {
   baseURL = 'http://localhost:3000/events';
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') as string;
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
