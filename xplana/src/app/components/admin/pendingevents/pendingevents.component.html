@@ -1,24 +1,31 @@
+<div class="errorMsg" *ngIf="error" [style]="styles">
+  <p>{{error}}</p>
+</div>
+<div class="errorMsg" *ngIf="successmsg" [style]="styles">
+  <p>{{successmsg}}</p>
+</div>
+
 <div class="dashboard">
   <div class="time-display">
     <div class="today">
       <h2>Today</h2>
       <img style="width: 30px" src="/icons/down.png" alt="" />
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(1, 162, 33); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
   </div>
 
   <div class="stats-grid">
     <div class="stat-item">
       <h3>Events to be approved</h3>
-      <p>367</p>
+      <p>{{events.length}}</p>
     </div>
     <div class="stat-item">
       <h3>Approved Events</h3>
-      <p>156</p>
+      <p>{{totalEvents}}</p>
     </div>
     <div class="stat-item">
       <h3>Events not Approved</h3>
-      <p>39</p>
+      <p>{{totalEvents - events.length}}</p>
     </div>
   </div>
 
@@ -36,14 +43,14 @@
     <div class="header-item">Actions</div>
   </div>
 
-  <div class="user-item">
+  <div class="user-item" *ngFor="let event of events, let i = index">
     <div class="item-user">
-			<img src="/profile_images/hailey.jpeg" alt="">
-			<p>Kate Morrison</p>
+			<img [src]="managers[i].profile_image" [alt]="managers[i].fullname">
+			<p>{{managers[i].fullname}}</p>
 		</div>
-    <div class="item-email">katem05&#64;gmail.com</div>
-    <div class="item-event-name">Beach Party</div>
-    <div class="item-location">Garrisa</div>
+    <div class="item-email">{{managers[i].email}}</div>
+    <div class="item-event-name">{{event.event_name}}</div>
+    <div class="item-location">{{event.location}}</div>
     <div class="item-actions">
       <button class="approve-button">Approve</button>
       <button class="reject-button">Reject</button>

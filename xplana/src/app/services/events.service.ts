@@ -52,4 +52,8 @@ export class EventsService {
   deleteAnEventById(event_id: string) {
     return this.http.delete<{error?: string, message?: string}>(`${this.baseURL}/delete-event/${event_id}`, {headers: this.getAuthHeaders()})
   }
+
+  getAllPendingEvents() {
+    return this.http.get<{error?: string, message?: string, events?: Events[], managers?: User[]}>(`${this.baseURL}/get-all-pending-events`, {headers: this.getAuthHeaders()})
+  }
 }

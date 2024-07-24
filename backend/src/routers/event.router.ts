@@ -16,4 +16,5 @@ events_route.get('/get-event-by-user-id', verifyTokens, event_controller.getEven
 events_route.put('/update-all-event-status', verifyTokens, event_controller.updateAllEventStatusByAdmin);
 events_route.get('/get-event-by-id/:event_id', verifyTokens, event_controller.getEventByEventId);
 events_route.get('/get-events-by-date-created', verifyTokens, event_controller.getAllEventsByDateCreated);
-events_route.delete('/delete-event/:event_id', verifyTokens, event_controller.deleteEvent)
+events_route.delete('/delete-event/:event_id', verifyTokens, event_controller.deleteEvent);
+events_route.get('/get-all-pending-events', verifyTokens, event_controller.getAllPendingEvents);

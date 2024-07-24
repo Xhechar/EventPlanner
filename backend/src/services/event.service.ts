@@ -221,6 +221,54 @@ export class EventService {
     }
   }
 
+  async getAllPendingEvents() {
+    let required_ids: string[] = [];
+    let managers: User[] = [];
+    let results = (
+      await Helper.query(
+        "select * from events where event_status = 'pending'"
+      )
+    ).recordset as Events[];
+
+    if (lodash.isEmpty(results)) {
+      return {
+        error: "There are no events pending events",
+      };
+    } else {
+      for (let result of results) {
+        required_ids.push(result.user_id);
+      }
+
+      if (required_ids.length == 0) {
+        return {
+          error: "No events were created by managers recently",
+        };
+      }
+      else {
+        for (let required_id of required_ids) {
+        
+          managers.push(
+            (await Helper.query(`select * from users where user_id = '${required_id}' and isDeleted = 0`)).recordset[0] as User
+          );
+        }
+  
+        if (managers.length == 0) {
+          return {
+            error: "No managers were found recently",
+          };
+        }
+  
+        else {
+          return {
+            message: "Recent events successfully retrieved",
+            events: results,
+            managers: managers
+          };
+        }
+      }
+    }
+  }
+
   async getAllEventsByDateCreated() {
     let required_ids: string[] = [];
     let managers: User[] = [];

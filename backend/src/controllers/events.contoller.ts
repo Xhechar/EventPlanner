@@ -153,6 +153,19 @@ export class EventsController {
 
   }
 
+  async getAllPendingEvents(req: Request, res: Response) {
+
+    try {
+
+      let response = await event_service.getAllPendingEvents();
+
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.json({error})
+    }
+
+  }
+
   async deleteEvent(req: Request, res: Response) {
 
     try {
