@@ -38,6 +38,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  row-gap: 5%;
 }
 
 .stat-item:hover {
@@ -149,4 +150,22 @@ h2 {
 
 .reject-button:hover {
   background-color: #dc3546b6;
+}
+
+.errorMsg, .successMsg {
+  z-index: 3;
+  position: fixed;
+  top: 8vh;
+  left: 40%;
+  width: 40vw;
+  height: 8vh;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 2px;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
 }

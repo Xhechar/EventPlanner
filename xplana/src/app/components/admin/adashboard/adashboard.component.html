@@ -4,28 +4,28 @@
       <h2>Today</h2>
       <img style="width: 30px;" src="/icons/down.png" alt="">
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(1, 162, 33); font-weight: 700; font-size: 18px;">: {{formattedTime}}</span></p>
   </div>
   <div class="stats-grid">
     <div class="stat-item">
       <h3>Total Users</h3>
-      <p>721K</p>
-      <span>+11.01%</span>
+      <p>{{totalUsers}}</p>
+      <span>+1.01%</span>
     </div>
     <div class="stat-item">
       <h3>Event Managers</h3>
-      <p>367K</p>
-      <span>-0.03%</span>
+      <p>{{totalManagers}}</p>
+      <span>{{totalUsers - totalManagers}}</span>
     </div>
     <div class="stat-item">
       <h3>Total Events</h3>
-      <p>1,156</p>
-      <span>+15.03%</span>
+      <p>{{totalEvents}}</p>
+      <span>+1.03%</span>
     </div>
     <div class="stat-item">
       <h3>Revenue Earned</h3>
-      <p>239K</p>
-      <span>+6.08%</span>
+      <p>{{totalRevenue | currency:"Ksh. "}}</p>
+      <span>+0.01%</span>
     </div>
   </div>
 
@@ -49,22 +49,22 @@
       </div>
     </div>
   
-    <div class="user-item">
+    <div class="user-item" *ngFor="let recent_user of recentUsers, let i = index">
       <div class="item-user">
-        <img src="/profile_images/hailey.jpeg" alt="">
-        <p>Kate Morrison</p>
+        <img [src]="recent_user.profile_image" [alt]="recent_user.fullname">
+        <p>{{recent_user.fullname}}</p>
       </div>
       <div class="item-email">
-        <p>katem05&#64;gmail.com</p>
+        <p>{{recent_user.email}}</p>
       </div>
       <div class="item-country">
-        <p>Larry San Francisco</p>
+        <p>{{recent_user.country}}</p>
       </div>
       <div class="item-date">
-        <p>1 minute ago</p>
+        <p>{{recent_user.createdAt | date}}</p>
       </div>
       <div class="item-contact">
-        <p>+254712345678</p>
+        <p>{{recent_user.phone_number}}</p>
       </div>
     </div>
   </div>
@@ -78,5 +78,25 @@
       <div class="header-item">Location Held</div>
       <div class="header-item">Total Booked</div>
     </div>
+    
+    <div class="user-item" *ngFor="let recent_user of recentManagers, let i = index">
+      <div class="item-user">
+        <img [src]="recent_user.profile_image" [alt]="recent_user.fullname">
+        <p>{{recent_user.fullname}}</p>
+      </div>
+      <div class="item-email">
+        <p>{{recent_user.email}}</p>
+      </div>
+      <div class="item-country">
+        <p>{{recentEvents[i].event_name}}</p>
+      </div>
+      <div class="item-date">
+        <p>{{recentEvents[i].location}}</p>
+      </div>
+      <div class="item-contact" style="display: flex; align-items: center; justify-content: center;">
+        <p>{{recentEvents[i].booked_tickets}}</p>
+      </div>
+    </div>
   </div>
+  
 </div>

@@ -95,7 +95,7 @@ export class UserService {
   }
 
   async getAllUsers() {
-    let result = (await Helper.query("select * from users where isDeleted = 0"))
+    let result = (await Helper.query("select * from users where isDeleted = 0 and role != 'admin'"))
       .recordset;
 
     if (lodash.isEmpty(result)) {
@@ -132,7 +132,7 @@ export class UserService {
   async getUserByRole() {
     let result = (
       await Helper.query(
-        "select * from users where role = 'manager' AND isDeleted = 0"
+        "select * from users where role = 'manager' AND isDeleted = 0 and isManager = 0"
       )
     ).recordset;
 
@@ -188,7 +188,7 @@ export class UserService {
   async getAllUsersByDateCreated() {
     let result = (
       await Helper.query(
-        "select * from users where createdAt = DATEADD(day, -3, CAST(GETDATE() as DATE)) AND isDeleted = 0"
+        "select * from users where createdAt >= DATEADD(DAY, -10, GETDATE()) AND isDeleted = 0 and role != 'admin'"
       )
     ).recordset;
 
@@ -218,6 +218,24 @@ export class UserService {
     } else {
       return {
         message: "User updated successfully to manager",
+      };
+    }
+  }
+
+  async revertUserRole(user_id: string) {
+    let result = (
+      await Helper.query(
+        `update users set role = 'attendee' where user_id = '${user_id}' AND isDeleted = 0`
+      )
+    ).rowsAffected;
+
+    if (result[0] < 1) {
+      return {
+        error: "Unable to revert role to attendee",
+      };
+    } else {
+      return {
+        message: "User user successfully denied managerial previledges",
       };
     }
   }
@@ -310,6 +328,23 @@ export class UserService {
     } else {
       return {
         message: "All deleted users restored successfully",
+      };
+    }
+  }
+
+  async retrieveAllManagers() {
+    let result = (
+      await Helper.query(`select * from users where isManager = 1 and isDeleted = 0`)
+    ).recordset;
+
+    if (result[0] < 1) {
+      return {
+        error: "Unable to retrieve managers",
+      };
+    } else {
+      return {
+        message: "All managers successfully retrieved",
+        managers: result as User[]
       };
     }
   }

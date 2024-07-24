@@ -113,6 +113,16 @@ export class UserController {
     }
   }
 
+  async revertUserRole(req: Request, res: Response) {
+    try {
+      let response = await user_service.revertUserRole(req.params.user_id);
+
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.json({ error });
+    }
+  }
+
   async updateAllUsersRoleByAdmin(req: Request, res: Response) {
     try {
       let response = await user_service.updateAllUsersRoleByAdmin();
@@ -156,6 +166,16 @@ export class UserController {
   async getUsersByEventId(req: Request, res: Response) {
     try {
       let response = await user_service.getUsersByEventId(req.params.event_id);
+
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.json({ error });
+    }
+  }
+
+  async retrieveAllManagers(req: Request, res: Response) {
+    try {
+      let response = await user_service.retrieveAllManagers();
 
       return res.status(201).json(response);
     } catch (error) {

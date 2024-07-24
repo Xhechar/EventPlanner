@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Events } from '../intefaces/interfaces';
+import { Events, User } from '../intefaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +46,7 @@ export class EventsService {
   }
 
   getEventByDateCreated() {
-    return this.http.get<{error?: string, message?: string, event?: Events[]}>(`${this.baseURL}/get-events-by-date-created`, {headers: this.getAuthHeaders()})
+    return this.http.get<{error?: string, message?: string, events?: Events[], managers?: User[]}>(`${this.baseURL}/get-events-by-date-created`, {headers: this.getAuthHeaders()})
   }
 
   deleteAnEventById(event_id: string) {

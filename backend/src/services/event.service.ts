@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { Events } from "../interfaces/interfaces";
+import { Events, User } from "../interfaces/interfaces";
 import { Helper } from "../db_helper/dbhelper";
 import mssql from "mssql";
 import { sqlConfig } from "../config/config";
@@ -222,21 +222,50 @@ export class EventService {
   }
 
   async getAllEventsByDateCreated() {
-    let result = (
+    let required_ids: string[] = [];
+    let managers: User[] = [];
+    let results = (
       await Helper.query(
-        "select * from events where createdAt = DATEADD(day, -1, CAST(GETDATE() AS DATE))"
+        "select * from events where createdAt >= DATEADD(DAY, -10, GETDATE())"
       )
-    ).recordset;
+    ).recordset as Events[];
 
-    if (lodash.isEmpty(result)) {
+    if (lodash.isEmpty(results)) {
       return {
         error: "There are no events created recently",
       };
     } else {
-      return {
-        message: "Recent events successfully retrieved",
-        events: result,
-      };
+      for (let result of results) {
+        required_ids.push(result.user_id);
+      }
+
+      if (required_ids.length == 0) {
+        return {
+          error: "No events were created by managers recently",
+        };
+      }
+      else {
+        for (let required_id of required_ids) {
+        
+          managers.push(
+            (await Helper.query(`select * from users where user_id = '${required_id}'`)).recordset[0] as User
+          );
+        }
+  
+        if (managers.length == 0) {
+          return {
+            error: "No managers were found recently",
+          };
+        }
+  
+        else {
+          return {
+            message: "Recent events successfully retrieved",
+            events: results,
+            managers: managers
+          };
+        }
+      }
     }
   }
 

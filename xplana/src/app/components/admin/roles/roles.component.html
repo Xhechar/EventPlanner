@@ -1,3 +1,9 @@
+<div class="errorMsg" *ngIf="error" [style]="styles">
+  <p>{{error}}</p>
+</div>
+<div class="errorMsg" *ngIf="successmsg" [style]="styles">
+  <p>{{successmsg}}</p>
+</div>
 
 <div class="dashboard">
   <div class="time-display">
@@ -5,26 +11,26 @@
       <h2>Today</h2>
       <img style="width: 30px" src="/icons/down.png" alt="" />
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(1, 162, 33); font-weight: 700; font-size: 18px;">: {{formattedTime}}</span></p>
   </div>
 
   <div class="stats-grid">
     <div class="stat-item">
       <p>Awaiting Managers</p>
-      <h2>367</h2>
+      <h2>{{users.length}}</h2>
     </div>
     <div class="stat-item">
       <p>Successfully Assigned Roles</p>
-      <h2>1,156</h2>
+      <h2>{{managersCount}}</h2>
     </div>
     <div class="stat-item">
       <p>Managers not Assigned</p>
-      <h2>239</h2>
+      <h2>{{users.length}}</h2>
     </div>
   </div>
 
   <div class="approve-all">
-    <button class="approve-all-button">Confirm All</button>
+    <button class="approve-all-button" (click)="updateAllUsersRoleByAdmin()">Confirm All</button>
   </div>
 
   <div class="details">
@@ -37,18 +43,26 @@
     <div class="header-item">Actions</div>
   </div>
 
-  <div class="user-item">
+  <div *ngIf="users.length == 0" style="width: 100%; height: 40vh; display: flex; align-items: center; justify-content: center">
+    <p style="color: rgb(187, 7, 7)">No users, to approve at the moment . . .</p>
+  </div>
+
+  <div class="user-item" *ngFor="let user of users, let i = index">
+    
     <div class="item-user">
-			<img src="/profile_images/hailey.jpeg" alt="">
-			<p>Kate Morrison</p>
+			<img [src]="user.profile_image" [alt]="user.fullname">
+			<p>{{user.fullname}}</p>
 		</div>
-    <div class="item-email">katem05&#64;gmail.com</div>
-    <div class="item-event-name">+254712345678</div>
-    <div class="item-location">approved</div>
-    <div class="item-actions">
-      <button class="approve-button">Approve</button>
-      <button class="reject-button">Reject</button>
+    <div class="item-email">{{user.email}}</div>
+    <div class="item-event-name">{{user.phone_number}}</div>
+    <div class="item-location" style="width: 100%; height: 100%; display: flex; justify-content: center">
+      <p style="color: #fb5604cf; font-size: 12px">Awaiting Approval</p>
     </div>
+    <div class="item-actions">
+      <button class="approve-button" (click)="updateUserRoleByAdmin(user.user_id)">Approve</button>
+      <button class="reject-button" (click)="revertUserRole(user.user_id)">Reject</button>
+    </div>
+
   </div>
 	</div>
 </div>

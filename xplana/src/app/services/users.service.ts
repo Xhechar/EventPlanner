@@ -43,11 +43,11 @@ export class UsersService {
   }
 
   updateUserRoleByAdmin(user_id: string) {
-    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/update-role-by-admin/${user_id}`, {headers: this.token_headers})
+    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/update-role-by-admin/${user_id}`, {}, {headers: this.token_headers})
   }
 
   updateAllUsersRoleByAdmin() {
-    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/update-all-user-roles`, {headers: this.token_headers})
+    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/update-all-user-roles`, {}, {headers: this.token_headers})
   }
 
   softDeleteUserByAdmin(user_id: string) {
@@ -64,5 +64,13 @@ export class UsersService {
 
   getUsersByEventId(event_id: string) {
     return this.http.get<{error?: string, message?: string, bookings?: Book [], users?: User[]}>(`${this.baseURL}/get-user-by-event-id/${event_id}`, {headers: this.token_headers})
+  }
+
+  retrieveAllManagers() {
+    return this.http.get<{error?: string, message?: string, managers?: User[]}>(`${this.baseURL}/get-all-managers`, {headers: this.token_headers})
+  }
+
+  revertUserRole(user_id: string) {
+    return this.http.put<{error?:string, message?:string}>(`${this.baseURL}/revert-user-role/${user_id}`, {}, {headers: this.token_headers})
   }
 }
