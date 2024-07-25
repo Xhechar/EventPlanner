@@ -13,10 +13,10 @@
         <img src="/icons/search.png" alt="" />
         <input type="text" placeholder="Search for events" />
       </div>
-      <div class="area">
-        <img class="home" src="/icons/white/home.png" alt="" />
-        <img class="notifications" src="/icons/white/notifications.png" alt="" />
-        <img class="profile" src="/profile_images/peter.jpeg" alt="" />
+      <div class="area" style="cursor: pointer;">
+        <img class="home" (click)="clearLocalStorage()" src="/icons/white/home.png" alt="" />
+        <img routerLink="/admin/a-notifications" class="notifications" src="/icons/white/notifications.png" alt="" />
+        <img routerLink="/admin/a-profile" class="profile" [src]="user.profile_image" [alt]="user.fullname" />
       </div>
     </div>
   </div>

@@ -18,4 +18,5 @@ userRoute.put('/retrieve-deleted-user/:user_id', verifyTokens, user_contoller.re
 userRoute.put('/retrieve-deleted-users', verifyTokens, user_contoller.retrieveAllDeletedUsers);
 userRoute.get('/get-user-by-event-id/:event_id', verifyTokens, user_contoller.getUsersByEventId);
 userRoute.get('/get-all-managers', verifyTokens, user_contoller.retrieveAllManagers);
+userRoute.get('/get-all-deleted-users', verifyTokens, user_contoller.getAllDeleteUsers);
 userRoute.put('/revert-user-role/:user_id', verifyTokens, user_contoller.revertUserRole)

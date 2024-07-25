@@ -1,58 +1,55 @@
-<div class="container">
+<div class="container" style="display: flex; justify-content: center; align-items: center;" *ngIf="!profile">
+	<h1>This information is currently not Available !!!</h1>
+</div>
+<div class="container" *ngIf="profile">
   <header>
     <div class="name-and-date">
-			<h1>Welcome, Exhechar</h1>
-			<p>Tue, 07 June 2022</p>
-    </div>
-    <div class="header-right">
-			<label for="event">Wishing to manage an event?</label>
-			<select id="event" name="event">
-					<option value="manager">Attendee</option>
-					<option value="manager">Manage</option>
-			</select>
+			<h1>Welcome, {{profile.fullname.split(' ')[0]}}</h1>
+			<p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(59, 58, 58); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
     </div>
   </header>
   <main>
 		<div class="profile">
 			<div class="profile-and-details">
 				<div class="image">
-					<img src="/profile_images/peter.jpeg" alt="Profile Picture">
+					<img [src]="profile.profile_image" [alt]="profile.fullname">
 				</div>
 				<div class="profile-info">
-					<h2>Felix Okoth</h2>
-					<p>felixokoth&#64;gmail.com</p>
+					<h2>{{profile.fullname}}</h2>
+					<p>{{profile.email}}</p>
 				</div>
 			</div>
 			<div class="botton-holder">
-				<button class="update-profile">
+				<button class="update-profile" (click)="toggleForm()">
 					<img src="/icons/updateprofile.png" alt="">
 					<p>Update Profile</p>
 				</button>
+				<p class="role">Current Role: <span style="color: rgb(7, 103, 158); font-weight: 800;">{{profile.role | uppercase}}</span></p>
 			</div>
 		</div>
 		<div class="info">
 			<div class="first">
 					<div class="info-field">
 						<label for="full-name">Full Name</label>
-						<input type="text" id="full-name" Value="Felix Okoth" readonly>
+						<input type="text" id="full-name" [value]="profile.fullname" readonly>
 					</div>
 				<div class="info-field">
 					<label for="username">Username</label>
-					<input type="text" id="username" value="Exhechar" readonly>
+					<input type="text" id="username" [value]="profile.fullname.split(' ')[0]" readonly>
 				</div>
 				<div class="info-field">
 					<label for="phone-number">Phone Number</label>
-					<input type="text" id="phone-number" value="+2547 123 45678" readonly>
+					<input type="text" id="phone-number" [value]="profile.phone_number" readonly>
 				</div>
 			</div>
 			<div class="second">
 				<div class="info-field">
 					<label for="address">Address</label>
-					<input type="text" id="address" value="910 - 30100, Uasin Gishu" readonly>
+					<input type="text" id="address" [value]="profile.address" readonly>
 				</div>
 				<div class="info-field">
 					<label for="country">Country</label>
-					<input type="text" id="country" value="Kenya" readonly>
+					<input type="text" id="country" [value]="profile.country" readonly>
 				</div>
 			</div>
 		</div>
@@ -62,9 +59,100 @@
 			</div>
 			<div class="email-infoo">
 				<h2>My email Address</h2>
-				<p>felixokoth&#64;gmail.com</p>
-				<p>1 month ago</p>
+				<p>{{profile.email}}</p>
+				<p style="text-decoration: underline;"><span style="color: black; font-weight: 800;">Date Joined: </span>{{profile.createdAt | date }}</p>
 			</div>
 		</div>
   </main>
+
+	<!--Success Messages-->
+
+	<div class="errorMsg" *ngIf="error" [style]="styles">
+    <p>{{error}}</p>
+  </div>
+  <div class="successMsg" *ngIf="success" [style]="styles">
+    <p>{{success}}</p>
+  </div>
+
+	<!--The update profile form-->
+
+	<div class="entire-div" [ngStyle]="style">
+		<div class="middle-contents">
+			<div class="left">
+				<div class="dark-background">
+					<h1 style="color: white; width: 50%; font-size: 36px; font-weight: 800; line-height: 150%;">Take full control</h1>
+				</div>
+			</div>
+			<div class="right">
+				<div class="title">
+					<h1>Update Your Profile</h1>
+				</div>
+				<!---->
+				<form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+					<div class="name">
+						<label for="">Full Name: </label>
+						<div class="input-and-error">
+							<input type="text" formControlName="fullname">
+							<div class="error">
+	
+							</div>
+						</div>
+					</div>
+					<div class="name">
+						<label for="">Phone Number:</label>
+						<div class="input-and-error">
+							<input type="phone" formControlName="phone_number">
+							<div class="error">
+							</div>
+						</div>
+					</div>
+					<div class="name">
+						<label for="">Email: </label>
+						<div class="input-and-error">
+							<input type="email" formControlName="email">
+							<div class="error">
+							</div>
+						</div>
+					</div>
+					<div class="name">
+						<label for="">Country Of Residence:</label>
+						<div class="input-and-error">
+							<input type="country" formControlName="country">
+							<div class="error">
+							</div>
+						</div>
+					</div>
+					<div class="name">
+						<label for="">Address: </label>
+						<div class="input-and-error">
+							<input type="address" formControlName="address">
+							<div class="error">
+							</div>
+						</div>
+					</div>
+					<div class="name">
+						<label for="">Profile Photo: </label>
+						<div class="input-and-error" style="position: relative;">
+							<input type="file" (change)="setProfilePhoto($event)">
+							<div class="loader" *ngIf="show"></div>
+							<div class="error">
+							</div>
+						</div>
+					</div>
+					<div class="name">
+						<label for="">Register As:</label>
+						<select formControlName="role">
+							<option value="">Select Role</option>
+							<option value="attendee">attendee</option>
+							<option value="manager">manager</option>
+						</select>
+					</div>
+					<div class="button-holder" style="margin-top: 3vh;">
+						<button type="button" (click)="toggleForm()" style="background-color: rgba(255, 0, 0, 0.79);">Cancel</button>
+						<button type="submit" [disabled]="updateUserForm.invalid">Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>

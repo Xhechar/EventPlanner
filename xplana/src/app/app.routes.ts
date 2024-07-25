@@ -39,7 +39,7 @@ export const routes: Routes = [
     component: AttendeeComponent, children: [
       { path: 'profile', component: ProfileComponent },
       { path: 'booking', component: BookingComponent },
-      {path: 'single-event/:event_id', component: SingleComponent},
+      {path: 'single-event/:event_id', component: EventformComponent},
       {
         path: 'events', component: EventsComponent, children: [
         {path: ':event_id', component: SingleComponent}

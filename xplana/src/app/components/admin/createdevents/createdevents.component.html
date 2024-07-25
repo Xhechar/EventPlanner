@@ -1,13 +1,20 @@
+<div class="errorMsg" *ngIf="error" [style]="styles">
+  <p>{{error}}</p>
+</div>
+<div class="errorMsg" *ngIf="successmsg" [style]="styles">
+  <p>{{successmsg}}</p>
+</div>
+
 <div class="dashboard">
   <div class="time-display">
     <div class="today">
       <h2>Today</h2>
       <img style="width: 30px" src="/icons/down.png" alt="" />
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(1, 162, 33); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
   </div>
 
-  <div class="stats-grid">
+  <div class="stats-grid" *ngIf="!events">
     <div class="stat-item">
       <h3>Total Events</h3>
       <p>102</p>
@@ -19,6 +26,21 @@
     <div class="stat-item">
       <h3>Event Earnings</h3>
       <p>Ksh. 19,850.59</p>
+    </div>
+  </div>
+
+  <div class="stats-grid" *ngIf="events">
+    <div class="stat-item">
+      <h3>Total Events</h3>
+      <p>{{events.length}}</p>
+    </div>
+    <div class="stat-item">
+      <h3>Total Attendees</h3>
+      <p>{{attendees}}</p>
+    </div>
+    <div class="stat-item">
+      <h3>Event Earnings</h3>
+      <p>{{earnings | currency: "Ksh. "}}</p>
     </div>
   </div>
 
@@ -37,16 +59,21 @@
     <div class="header-item">Total Attendees</div>
   </div>
 
-  <div class="user-item">
-    <div class="item-user">
-			<img src="/profile_images/hailey.jpeg" alt="">
-			<p>Kate Morrison</p>
-		</div>
-    <div class="item-email">katem05&#64;gmail.com</div>
-    <div class="item-event-name">Beach Party</div>
-    <div class="item-location">Mombasa</div>
-    <div class="item-actions">
-      700
+  <div class="cls" *ngIf="!events">
+    <h2>No events Available at the moment</h2>
+  </div>
+  <div class="cls" *ngIf="events">
+    <div class="user-item" *ngFor="let event of events, let i = index">
+      <div class="item-user">
+        <img [src]="managers[i].profile_image" [alt]="managers[i].fullname">
+        <p>{{managers[i].fullname}}</p>
+      </div>
+      <div class="item-email">{{managers[i].email}}</div>
+      <div class="item-event-name">{{event.event_name}}</div>
+      <div class="item-location">{{event.location}}</div>
+      <div class="item-actions">
+        {{event.booked_tickets}}
+      </div>
     </div>
   </div>
 	</div>

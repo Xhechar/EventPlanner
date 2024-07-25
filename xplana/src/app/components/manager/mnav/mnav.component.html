@@ -14,9 +14,9 @@
         <input type="text" placeholder="Search for events" />
       </div>
       <div class="area">
-        <img class="home" src="/icons/home.png" alt="" />
-        <img class="notifications" src="/icons/notifications.png" alt="" />
-        <img class="profile" src="/profile_images/peter.jpeg" alt="" />
+        <img class="home" (click)="clearLocalStorage()" src="/icons/home.png" alt="" />
+        <img routerLink="/manager/m-notifications" class="notifications" src="/icons/notifications.png" alt="" />
+        <img routerLink="/manager/m-profile" class="profile" [src]="user.profile_image" [alt]="user.fullname" />
       </div>
     </div>
   </div>

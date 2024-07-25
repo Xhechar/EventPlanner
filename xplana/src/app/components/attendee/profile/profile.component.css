@@ -103,11 +103,19 @@ main {
 }
 
 .botton-holder {
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.role {
+  position: absolute;
+  right: 8%;
+  top: 0;
 }
 
 .profile img {
@@ -238,3 +246,199 @@ main {
   align-items: start;
   justify-content: center;
 }
+
+/*Form Styles*/
+
+.entire-div {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorMsg, .successMsg {
+  position: fixed;
+  top: 8vh;
+  left: 40%;
+  width: 40vw;
+  height: 8vh;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 2px;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+}
+
+.middle-contents {
+  background-color: #fff;
+  width: 60%;
+  height: 60%;
+  border-radius: 10px;
+  padding: 1%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  column-gap: 2%;
+}
+
+.left {
+  width: 100%;
+  height: 100%;
+  background-image: url(../../../../../public/events/food\ fest.jpeg);
+  background-size: cover ;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+}
+
+.dark-background {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 10% 1fr;
+  row-gap: 2%;
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.title p {
+  color: rgb(120, 119, 119);
+  font-size: 13px;
+}
+
+form {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  row-gap: 5px;
+}
+
+form > div {
+  display: flex;
+  align-items: center;
+}
+
+.name label {
+  width: 35%;
+  font-weight: 600;
+}
+
+.error {
+  height: 10%;
+  display: flex;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding-left: 4px;
+}
+
+.error p {
+  font-size: 12px;
+  color: rgb(190, 17, 17);
+}
+
+.button-holder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  column-gap: 2%;
+  align-items: center;
+  justify-content: center;
+}
+
+form button {
+  width: 55%;
+  height: 100%;
+  background-color: #5cb85c;
+}
+
+form button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+select {
+  width: 63%;
+  height: 100%;
+  background-color: #cefbce;
+  border-radius: 10px;
+  border: none;
+  padding-left: 2%;
+}
+
+.input-and-error {
+  width: 63%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-and-error input {
+  background-color: rgb(224, 224, 224);
+  height: 90%;
+  border: none;
+  border-radius: 10px;
+  border-bottom: 1px dotted rgb(120, 119, 119);
+  padding-left: 2%;
+}
+
+.loader {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid rgb(0, 106, 255);
+  border-bottom: 3px solid rgb(0, 106, 255);
+  width: 8px;
+  height: 8px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+

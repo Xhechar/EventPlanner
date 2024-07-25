@@ -1,0 +1,171 @@
+.dashboard {
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.time-display {
+  width: 100%;
+  height: 8vh;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+}
+
+.today {
+  width: 100%;
+  display:flex;
+  align-items: center;
+}
+
+.stats-grid {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-item {
+  height: 100%;
+  background-color: rgb(1, 43, 66);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 5%;
+}
+
+.stat-item:hover {
+  cursor: pointer;
+  box-shadow: 0 0 10px #444;
+}
+
+.stat-item h3 {
+  margin-bottom: 10px;
+}
+
+.approve-all {
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.approve-all-button {
+  background-color: #28a745;
+  padding: 1.5% 3%;
+  margin-right: 10%;
+  position: relative;
+}
+
+.approve-all-button:hover {
+  background-color: #28a746b6;
+}
+
+h2 {
+  margin-bottom: 2vh;
+}
+
+.grid-header {
+  width: 100%;
+  height: 8vh;
+  font-weight: 600;
+  border-bottom: 2px solid #444;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  background-color: black;
+}
+
+.user-item {
+  width: 100%;
+  height: 8vh;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.details {
+  width: 100%;
+}
+
+.header-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-right: 1px solid #b3b3b3;
+}
+
+.user-item {
+  align-items: center;
+  border-bottom: 1px solid #444;
+}
+
+.user-item > div img {
+  width: 20%;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.item-user,
+.item-email,
+.item-event-name,
+.item-location {
+  display: flex;
+  align-items: center;
+  column-gap: 5%;
+  padding-left: 10px;
+}
+
+.item-actions {
+  display: flex;
+  height: 100%;
+  column-gap: 3%;
+  align-items: center;
+  justify-content: center;
+}
+
+.approve-button, .reject-button {
+  background-color: #28a745;
+  width: 40%;
+  height: 60%;
+}
+
+.reject-button {
+  background-color: #dc3545;
+}
+
+.approve-button:hover {
+  background-color: #28a746b6;
+}
+
+.reject-button:hover {
+  background-color: #dc3546b6;
+}
+
+.errorMsg, .successMsg {
+  z-index: 3;
+  position: fixed;
+  top: 8vh;
+  left: 40%;
+  width: 40vw;
+  height: 8vh;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 2px;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+}

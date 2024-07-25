@@ -182,6 +182,7 @@ export class BookingService {
   async getAttendeeBookingHistory(user_id: string) {
     let event_ids: string[] = [];
     let fetchedEvents: Events[] = [];
+    let fetchedBookings: Events[] = [];
 
     let userExists = (
       await Helper.query(`select * from users where user_id = '${user_id}' AND isDeleted = 0`)
@@ -195,7 +196,7 @@ export class BookingService {
 
     let eventsAvailable = (
       await Helper.query(`select * from bookings where user_id = '${user_id}'`)
-    ).recordset;
+    ).recordset as Events[];
 
     if (lodash.isEmpty(eventsAvailable)) {
       return {
@@ -204,6 +205,7 @@ export class BookingService {
     } else {
       for (let event of eventsAvailable) {
         event_ids.push(event.event_id);
+        fetchedBookings.push(event);
       }
 
       if (event_ids.length == 0) {
@@ -233,6 +235,7 @@ export class BookingService {
           return {
             message: "Events successfully retrieved",
             events: fetchedEvents,
+            bookings: fetchedBookings
           };
         }
       }

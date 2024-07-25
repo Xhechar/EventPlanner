@@ -79,6 +79,7 @@ export class UserService {
           country: user.country,
           address: user.address,
           profile_image: user.profile_image,
+          role: user.role
         })
       ).rowsAffected;
 
@@ -105,6 +106,22 @@ export class UserService {
     } else {
       return {
         message: "Users successfully retrieved",
+        users: result as User[],
+      };
+    }
+  }
+
+  async getAllDeletedUsers() {
+    let result = (await Helper.query("select * from users where isDeleted = 1"))
+      .recordset;
+
+    if (lodash.isEmpty(result)) {
+      return {
+        error: "Error fetching deleted users users",
+      };
+    } else {
+      return {
+        message: "Users successfully retrieved deleted",
         users: result as User[],
       };
     }

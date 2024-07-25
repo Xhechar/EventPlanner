@@ -12,7 +12,7 @@
   <div class="dynamic-contents">
     <div class="event-card" *ngFor="let event of events; let i = index">
       <div class="image-area">
-        <img src="/events/cover 2.jpg" alt="">
+        <img [src]="event.images" [alt]="event.event_name">
       </div>
       <div class="event-details">
         <h3>{{event.event_name}}</h3>

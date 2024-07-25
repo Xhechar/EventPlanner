@@ -65,6 +65,16 @@ export class UserController {
     }
   }
 
+  async getAllDeleteUsers(req: Request, res: Response) {
+    try {
+      let response = await user_service.getAllDeletedUsers();
+
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.json({ error });
+    }
+  }
+
   async getUserById(req: Request, res: Response) {
     try {
       let user_id = getIdFromToken(req);

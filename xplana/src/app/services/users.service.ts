@@ -51,15 +51,15 @@ export class UsersService {
   }
 
   softDeleteUserByAdmin(user_id: string) {
-    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/soft-delete-user/${user_id}`, {headers: this.token_headers})
+    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/soft-delete-user/${user_id}`, {}, {headers: this.token_headers})
   }
 
   retrieveDeletedUserByAdmin(user_id: string) {
-    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/retrieve-deleted-user/${user_id}`, {headers: this.token_headers})
+    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/retrieve-deleted-user/${user_id}`, {}, {headers: this.token_headers})
   }
 
   retrieveAllDeletedUsersByAdmin() {
-    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/retrieve-deleted-users`, {headers: this.token_headers})
+    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/retrieve-deleted-users`, {}, {headers: this.token_headers})
   }
 
   getUsersByEventId(event_id: string) {
@@ -68,6 +68,10 @@ export class UsersService {
 
   retrieveAllManagers() {
     return this.http.get<{error?: string, message?: string, managers?: User[]}>(`${this.baseURL}/get-all-managers`, {headers: this.token_headers})
+  }
+
+  getAllDeletedUsers() {
+    return this.http.get<{error?: string, message?: string, users?: User[]}>(`${this.baseURL}/get-all-deleted-users`, {headers: this.token_headers})
   }
 
   revertUserRole(user_id: string) {

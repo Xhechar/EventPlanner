@@ -1,24 +1,46 @@
+<div class="errorMsg" *ngIf="error" [style]="styles">
+  <p>{{error}}</p>
+</div>
+<div class="errorMsg" *ngIf="successmsg" [style]="styles">
+  <p>{{successmsg}}</p>
+</div>
+
 <div class="dashboard">
   <div class="time-display">
     <div class="today">
       <h2>Today</h2>
       <img style="width: 30px" src="/icons/down.png" alt="" />
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(1, 162, 33); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
   </div>
 
-  <div class="stats-grid">
+  <div class="stats-grid" *ngIf="!users">
     <div class="stat-item">
       <h3>Total Registered Users</h3>
-      <p>1,367</p>
+      <p>0</p>
     </div>
     <div class="stat-item">
       <h3>Total Attendees</h3>
-      <p>1,156</p>
+      <p>0</p>
     </div>
     <div class="stat-item">
       <h3>Managers Available</h3>
-      <p>200</p>
+      <p>0</p>
+    </div>
+  </div>
+
+  <div class="stats-grid" *ngIf="users">
+    <div class="stat-item">
+      <h3>Total Registered Users</h3>
+      <p>{{users.length}}</p>
+    </div>
+    <div class="stat-item">
+      <h3>Total Attendees</h3>
+      <p>{{attendeesCount}}</p>
+    </div>
+    <div class="stat-item">
+      <h3>Managers Available</h3>
+      <p>{{users.length - attendeesCount}}</p>
     </div>
   </div>
 
@@ -28,7 +50,7 @@
   </div>
 
   <div class="details">
-    <h2>Event Approval Pending</h2>
+    <h2>X - Planners Available</h2>
     <div class="grid-header">
       <div class="header-item">User</div>
       <div class="header-item">Email</div>
@@ -37,16 +59,27 @@
       <div class="header-item">Actions</div>
     </div>
 
-    <div class="user-item">
-      <div class="item-user">
-        <img src="/profile_images/hailey.jpeg" alt="" />
-        <p>Kate Morrison</p>
-      </div>
-      <div class="item-email">katem05&#64;gmail.com</div>
-      <div class="item-event-name">+254712345678</div>
-      <div class="item-location">Attendee</div>
-      <div class="item-actions">
-        <button class="reject-button">Delete User</button>
+    <div class="smh" *ngIf="!users">
+      <p>No users currently Available</p>
+    </div>
+
+    <div class="smh" *ngIf="users">
+      <div class="user-item" *ngFor="let user of users, let i = index">
+        <div class="item-user">
+          <img [src]="user.profile_image" [alt]="user.fullname" />
+          <p>{{user.fullname}}</p>
+        </div>
+        <div class="item-email">{{user.email}}</div>
+        <div class="item-event-name" style="display: flex; align-items: center;justify-content: center; width: 100%; height: 100%;">{{user.phone_number}}</div>
+        <div class="item-location" style="display: flex; align-items: center;justify-content: center; width: 100%; height: 100%;" *ngIf="user.role == 'manager'">
+          <p style="color: rgb(16, 150, 16); font-size: 14px;">{{user.role}}</p>
+        </div>
+        <div class="item-location" style="display: flex; align-items: center;justify-content: center; width: 100%; height: 100%;" *ngIf="user.role == 'attendee'">
+          <p style="color: rgb(201, 87, 11); font-size: 14px;">{{user.role}}</p>
+        </div>
+        <div class="item-actions">
+          <button class="reject-button" (click)="softDeleteUserByAdmin(user.user_id)">Delete User</button>
+        </div>
       </div>
     </div>
   </div>

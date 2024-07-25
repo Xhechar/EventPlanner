@@ -4,12 +4,13 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Route, Router, RouterLink } from '@angular/router';
 import { Logins } from '../../intefaces/interfaces';
 import { UsersService } from '../../services/users.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, NavbarComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

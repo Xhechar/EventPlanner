@@ -1,10 +1,17 @@
+<div class="errorMsg" *ngIf="error" [style]="styles">
+  <p>{{error}}</p>
+</div>
+<div class="errorMsg" *ngIf="successmsg" [style]="styles">
+  <p>{{successmsg}}</p>
+</div>
+
 <div class="entire-contents">
   <div class="time-display">
     <div class="today">
       <h2>Today</h2>
       <img style="width: 30px;" src="/icons/down.png" alt="">
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(1, 162, 33); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
   </div>
   <div class="booking-title">
     <h2>Bookings Available Today</h2>
@@ -40,29 +47,41 @@
       </div>
       
     </div>
-    <div class="dynamic-display">
+    <div class="dynamic-display" *ngFor="let event of events, let i = index">
       <div class="detail">
-        <img src="/events/himg2.jpeg" alt="">
+        <img [src]="event.images" [alt]="event.event_name">
       </div>
       <div class="detail">
-        <p>Couple's Date Night</p>
+        <p>{{event.event_name}}</p>
       </div>
       <div class="detail">
-        <p>Couple</p>
+        <p>{{bookings[i].ticket_type}}</p>
       </div>
       <div class="detail">
-        <p>12, 000</p>
+        <div class="if" *ngIf="bookings[i].ticket_type == 'couple'">
+          <p>{{event.couple | currency:"Ksh. "}}</p>
+        </div>
+        <div class="if" *ngIf="bookings[i].ticket_type == 'singles'">
+          <p>{{event.singles | currency:"Ksh. "}}</p>
+        </div>
+        <div class="if" *ngIf="bookings[i].ticket_type == 'groups'">
+          <p>{{event.groups | currency:"Ksh. "}}</p>
+        </div>
       </div>
       <div class="detail">
-        <p>Confirmed</p>
+        <div class="if" *ngIf="bookings[i].book_status == true">
+          <p style="color: rgba(0, 128, 0, 0.804); font-size: 14px;">Approved</p>
+        </div>
+        <div class="if" *ngIf="bookings[i].book_status == false">
+          <p style="color: rgba(191, 63, 8, 0.804); font-size: 14px;">Pending</p>
+        </div>
       </div>
       <div class="detail">
-        <p>10 July 2024</p>
+        <p>{{bookings[i].createdAt | date}}</p>
       </div>
-      <div class="detail">
-        <button>
-          <img style="width: 20px;" src="/icons/delete.png" alt="">
-        </button>
+      <div class="detail" style="width: 100%; height: 100%; display: flex; align-items: center;">
+        <button style="background-color: rgba(11, 108, 11, 0.753);">Update</button>
+        <button (click)="deleteBooking(bookings[i].book_id)" style="background-color: rgba(126, 7, 7, 0.826);">Delete</button>
       </div>
     </div>
   </div>

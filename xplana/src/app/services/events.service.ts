@@ -26,15 +26,15 @@ export class EventsService {
   }
 
   getAllEvents() {
-    return this.http.get<{error?: string, message?:string, events?: Events[]}>(`${this.baseURL}/get-all-events`, {headers: this.getAuthHeaders()})
+    return this.http.get<{error?: string, message?:string, events?: Events[], managers?: User[]}>(`${this.baseURL}/get-all-events`, {headers: this.getAuthHeaders()})
   }
 
   updateAllEventStatus() {
-    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/update-all-event-status`, {headers: this.getAuthHeaders()})
+    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/update-all-event-status`,{}, {headers: this.getAuthHeaders()})
   }
 
   updateEventStatus(event_id:string) {
-    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/update-event-status/${event_id}`, {headers: this.getAuthHeaders()})
+    return this.http.put<{error?: string, message?: string}>(`${this.baseURL}/update-event-status/${event_id}`, {}, {headers: this.getAuthHeaders()})
   }
 
   getEventById(event_id: string) {

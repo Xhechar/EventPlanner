@@ -1,8 +1,8 @@
 <div class="sidebar">
   <div class="elements-contaiver">
     <div class="profile-image-and-name">
-      <img src="/profile_images/peter.jpeg" alt="Profile Image" />
-      <h4>Exhechar</h4>
+      <img [src]="user.profile_image" [alt]="user.fullname" />
+      <h4>{{user.fullname.split(' ')[0]}}</h4>
     </div>
     <div class="dashboard-elements">
       <div class="dashboard-name">

@@ -24,13 +24,13 @@
       <p>{{totalEvents}}</p>
     </div>
     <div class="stat-item">
-      <h3>Events not Approved</h3>
+      <h3>Events</h3>
       <p>{{totalEvents - events.length}}</p>
     </div>
   </div>
 
   <div class="approve-all">
-    <button class="approve-all-button">Approve All</button>
+    <button class="approve-all-button" (click)="updateAllEventStatus()">Approve All</button>
   </div>
 
   <div class="details">
@@ -52,8 +52,8 @@
     <div class="item-event-name">{{event.event_name}}</div>
     <div class="item-location">{{event.location}}</div>
     <div class="item-actions">
-      <button class="approve-button">Approve</button>
-      <button class="reject-button">Reject</button>
+      <button class="approve-button" (click)="updateEventStatus(event.event_id)">Approve</button>
+      <button class="reject-button" (click)="deleteAnEventById(event.event_id)">Delete</button>
     </div>
   </div>
 	</div>

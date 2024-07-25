@@ -4,18 +4,21 @@
       <h2>Today</h2>
       <img style="width: 30px" src="/icons/down.png" alt="" />
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(59, 58, 58); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
   </div>
   <div class="top-events">
     <h2>Hosted Top Events!</h2>
   </div>
   <div class="dynamic-contents">
-    <div class="event-card">
-      <div class="details">
-        <h3>Event 1</h3>
-        <p>Description of Event 1</p>
+    <div class="event-card" *ngFor="let event of events; let i = index">
+      <div class="image-area">
+        <img [src]="event.images" [alt]="event.event_name">
+      </div>
+      <div class="event-details">
+        <h3>{{event.event_name}}</h3>
+        <p>{{event.short_desc}}</p>
         <div class="buttons">
-          <button>Book now</button>
+          <button (click)="navigateToBooking(event.event_id)">Book now</button>
         </div>
       </div>
     </div>

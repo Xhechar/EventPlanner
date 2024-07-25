@@ -1,3 +1,22 @@
+
+.errorMsg, .successMsg {
+  z-index: 3;
+  position: fixed;
+  top: 8vh;
+  left: 40%;
+  width: 40vw;
+  height: 8vh;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 2px;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+}
+
 .entire-contents {
   width: 100%;
   display: flex;
@@ -48,14 +67,26 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  column-gap: 4%;
   padding: 10px;
+}
+
+.detail button {
+  width: 48%;
+  height: 60%;
+  transition: all 0.3s;
+}
+
+.detail button:hover {
+  opacity: 0.8;
 }
 
 .item {
   border-right: 1px solid rgb(124, 122, 122);}
 
 .detail {
-  border-radius: 10px;
+  height: 100%;
+  width: 100%;
 }
 
 .detail img {
@@ -65,7 +96,9 @@
 }
 
 .dynamic-display {
-  background-color: transparent;
+  height: 10vh;
+  background-color: #fff;
+  border-bottom: 1px dashed #311010;
 }
 
 button {

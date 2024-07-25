@@ -1,24 +1,46 @@
+<div class="errorMsg" *ngIf="error" [style]="styles">
+  <p>{{error}}</p>
+</div>
+<div class="errorMsg" *ngIf="successmsg" [style]="styles">
+  <p>{{successmsg}}</p>
+</div>
+
 <div class="dashboard">
   <div class="time-display">
     <div class="today">
       <h2>Today</h2>
       <img style="width: 30px" src="/icons/down.png" alt="" />
     </div>
-    <p>Wednessday, 10 July 2024</p>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(1, 162, 33); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
   </div>
 
-  <div class="stats-grid">
+  <div class="stats-grid" *ngIf="!managers">
     <div class="stat-item">
       <h3>Total Managers</h3>
-      <p>367</p>
+      <p>0</p>
     </div>
     <div class="stat-item">
       <h3>Already With Event</h3>
-      <p>300</p>
+      <p>0</p>
     </div>
     <div class="stat-item">
       <h3>Without Event</h3>
-      <p>67</p>
+      <p>0</p>
+    </div>
+  </div>
+
+  <div class="stats-grid" *ngIf="managers">
+    <div class="stat-item">
+      <h3>Total Managers</h3>
+      <p>{{managers.length}}</p>
+    </div>
+    <div class="stat-item">
+      <h3>Already With Event</h3>
+      <p>{{managers.length}}</p>
+    </div>
+    <div class="stat-item">
+      <h3>Without Event</h3>
+      <p>{{managers.length - managers.length}}</p>
     </div>
   </div>
 
@@ -28,21 +50,28 @@
     <div class="header-item">Manager Name</div>
     <div class="header-item">Email</div>
     <div class="header-item">Contact</div>
-    <div class="header-item">Status</div>
+    <div class="header-item">Date Joined</div>
     <div class="header-item">Actions</div>
   </div>
 
-  <div class="user-item">
-    <div class="item-user">
-			<img src="/profile_images/hailey.jpeg" alt="">
-			<p>Kate Morrison</p>
-		</div>
-    <div class="item-email">katem05&#64;gmail.com</div>
-    <div class="item-event-name">+254712345678</div>
-    <div class="item-location">Approved</div>
-    <div class="item-actions">
-      <button class="reject-button">Reject Previledge</button>
+  <div class="cls" *ngIf="!managers">
+    <h2>No Managers Available at the moment</h2>
+  </div>
+  <div class="cls" *ngIf="managers">
+    <div class="user-item" *ngFor="let manager of managers, let i = index">
+      <div class="item-user">
+        <img [src]="manager.profile_image" [alt]="manager.fullname">
+        <p>{{manager.fullname}}</p>
+      </div>
+      <div class="item-email">{{manager.email}}</div>
+      <div class="item-event-name" style="display: flex; align-items: center;justify-content: center; width: 100%; height: 100%;">{{manager.phone_number}}</div>
+      <div class="item-location" style="display: flex; align-items: center;justify-content: center; width: 100%; height: 100%;">{{manager.createdAt | date}}</div>
+      <div class="item-actions">
+        <button class="reject-button" (click)="revertUserRole(manager.user_id)">Reject Previledge</button>
+      </div>
     </div>
   </div>
+
+  
 	</div>
 </div>

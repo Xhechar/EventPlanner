@@ -35,7 +35,11 @@ export class AdashboardComponent {
 
 
   constructor(private userService: UsersService, private eventService: EventsService) {
-    
+    this.getAllUsers();
+    this.retrieveAllManagers();
+    this.getAllEvents();
+    this.getUsersByDateCreated();
+    this.getEventByDateCreated();
   }
 
   ngOnInit() {

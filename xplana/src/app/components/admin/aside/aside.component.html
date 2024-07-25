@@ -1,8 +1,8 @@
 <div class="sidebar">
   <div class="elements-container">
     <div class="profile-image-and-name">
-      <img src="/profile_images/peter.jpeg" alt="Profile Image" />
-      <h4>Exhechar</h4>
+      <img [src]="user.profile_image" [alt]="user.fullname" />
+      <h4>{{user.fullname.split(' ')[0]}}</h4>
     </div>
     <div class="dashboard-elements">
       <div class="dashboard-name">
@@ -49,7 +49,7 @@
         <div routerLink="analytics" class="element">
           <img class="arrow" src="/icons/foward.png" alt="" />
           <img class="icon" src="/icons/white/analytics.png" alt="" />
-          <p>Analytics</p>
+          <p>Deleted Users</p>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
           <img class="icon" src="/icons/white/profile.png" alt="" />
           <p>Profile</p>
         </div>
-        <div class="element" routerLink="/login">
+        <div class="element" (click)="clearLocalStorage()">
           <img class="arrow" src="/icons/foward.png" alt="" />
           <img class="icon" src="/icons/white/logout.png" alt="" />
           <p>Logout</p>

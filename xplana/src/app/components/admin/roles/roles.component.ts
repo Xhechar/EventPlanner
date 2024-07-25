@@ -45,7 +45,6 @@ export class RolesComponent {
     this.userService.retrieveAllManagers().subscribe(res => {
       this.managers = res.managers as User[];
       this.managersCount = this.managers.length;
-      console.log(this.managersCount)
     })
   }
 

@@ -1,0 +1,106 @@
+<div class="errorMsg" *ngIf="error" [style]="styles">
+  <p>{{error}}</p>
+</div>
+<div class="errorMsg" *ngIf="successmsg" [style]="styles">
+  <p>{{successmsg}}</p>
+</div>
+
+<div class="dashboard">
+  <div class="time-display">
+    <button style="height: 5vh; width: 10%; margin: 5px;" (click)="navigateback()"><span style="font-size: 20px;">< </span> Back</button>
+    <div class="event-name" style="width: 100%; height: 8vh; text-align: center;">
+      <h1 style="font-weight: 600;">{{event.event_name}}</h1>
+    </div>
+    <div class="today">
+      <h2>Today</h2>
+      <img style="width: 30px;" src="/icons/down.png" alt="">
+    </div>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(59, 58, 58); font-weight: 700; font-size: 16px;">: {{formattedTime}}</span></p>
+  </div>
+  
+  <div class="details">
+    <div class="image-and-details">
+      <div class="event-image" [style]="myStyle">
+        <div class="darkarea"></div>
+      </div> 
+      <div class="event-extras">
+        <h2>{{event.event_name}}</h2>
+        <h3 style="margin-left: 70%; font-weight: 700;">Remaining Tickets: &nbsp; {{event.remaining_tickets}}</h3>
+        <p style="color: #777; margin-top: 1vh; font-size: small;">{{event.short_desc}}</p>
+        <h3 style="margin-top: 3vh;"><Details></Details></h3>
+        <p style="margin-left: 3%; border-top: 3vh; line-height: 25px;text-transform: capitalize; text-indent: 30px; font-size: 14px; width: 60%;">{{event.long_desc}}</p>
+        <div class="calendar-dates" style="height: 20vh;">
+          <div class="calender">
+            <img src="/icons/stars.png" alt="">
+            <div class="pp">
+              <h3>Singles</h3>
+              <p>{{event.singles | currency: "Ksh. "}}</p>
+            </div>
+          </div>
+          <div class="calender">
+            <img src="/icons/stars.png" alt="">
+            <div class="pp">
+              <h3>Couple</h3>
+              <p>{{event.couple | currency: "Ksh. "}}</p>
+            </div>
+          </div>
+          <div class="calender">
+            <img src="/icons/stars.png" alt="">
+            <div class="pp">
+              <h3>Group of Five</h3>
+              <p>{{event.groups | currency: "Ksh. "}}</p>
+            </div>
+          </div>
+        </div>
+        
+        <h3 style="font-weight: 500; margin-top: 2vh;">Location</h3>
+        <div class="location">
+          <img src="/icons/location_on_20dp.svg" alt="">
+          <p>{{event.location}} **</p>
+        </div>
+
+        <div class="calendar-dates">
+          <div class="calender">
+            <img src="/icons/calendar_month_20dp_000000.png" alt="">
+            <div class="pp">
+              <h3 style="color: rgb(134, 7, 7);">Start Date</h3>
+              <p>{{event.start_date | date}}</p>
+            </div>
+          </div>
+          <div class="calender">
+            <img src="/icons/calendar_month_20dp_000000.png" alt="">
+            <div class="pp">
+              <h3 style="color: rgb(11, 60, 121);">End Date</h3>
+              <p>{{event.end_date | date}}</p>
+            </div>
+          </div>
+          <div class="calender">
+            <img src="/icons/calendar_month_20dp_000000.png" alt="">
+            <div class="pp">
+              <h3 style="color: rgb(5, 64, 51);">Booking deadline</h3>
+              <p>{{event.booking_deadline | date}}</p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div class="booking">
+      <h2 style="font-weight: 800; margin-top: 5vh;">Get Tickect Now</h2>
+      <form #bookingForm="ngForm" (ngSubmit)="createBooking(bookingForm.value)">
+        <div class="inputs">
+          <Label>
+            <h3 style="font-weight: 600;">Ticket Type: </h3>
+          </Label>
+          <select name="ticket_type" ngModel #ticket_type>
+            <option>singles</option>
+            <option>couple</option>
+            <option>groups</option>
+          </select>
+        </div>
+        <div class="button">
+          <button type="submit">Book Now</button>
+        </div>
+      </form>
+    </div> 
+  </div>
+</div>

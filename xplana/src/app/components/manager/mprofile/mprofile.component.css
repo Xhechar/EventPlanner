@@ -267,6 +267,7 @@ main {
 .errorMsg, .successMsg {
   position: fixed;
   top: 8vh;
+  left: 40%;
   width: 40vw;
   height: 8vh;
   border: none;

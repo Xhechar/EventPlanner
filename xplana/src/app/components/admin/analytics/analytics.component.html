@@ -1,1 +1,56 @@
-<p>analytics works!</p>
+<div class="errorMsg" *ngIf="error" [style]="styles">
+  <p>{{error}}</p>
+</div>
+<div class="errorMsg" *ngIf="successmsg" [style]="styles">
+  <p>{{successmsg}}</p>
+</div>
+
+<div class="dashboard">
+  <div class="time-display">
+    <div class="today">
+      <h2>Today</h2>
+      <img style="width: 30px" src="/icons/down.png" alt="" />
+    </div>
+    <p style="margin-top: 1vh;">{{formattedDate}} __- Time<span style="color: rgb(1, 162, 33); font-weight: 700; font-size: 18px;">: {{formattedTime}}</span></p>
+  </div>
+
+  <div class="stats-grid">
+    <h2>Deleted Users List</h2>
+  </div>
+
+  <div class="approve-all">
+    <button class="approve-all-button" (click)="retrieveAllDeletedUsersByAdmin()">Restore All</button>
+  </div>
+
+  <div class="details">
+		<h2>Ex - Users!</h2>
+  <div class="grid-header">
+    <div class="header-item">User</div>
+    <div class="header-item">Email</div>
+    <div class="header-item">Contact</div>
+    <div class="header-item">Role Initially</div>
+    <div class="header-item">Actions</div>
+  </div>
+
+  <div *ngIf="deletedUsers.length == 0" style="width: 100%; height: 40vh; display: flex; align-items: center; justify-content: center">
+    <p style="color: rgb(187, 7, 7)">No Deleted Users, to Restore at the moment . . .</p>
+  </div>
+
+  <div class="user-item" *ngFor="let user of deletedUsers, let i = index">
+    
+    <div class="item-user">
+			<img [src]="user.profile_image" [alt]="user.fullname">
+			<p>{{user.fullname}}</p>
+		</div>
+    <div class="item-email">{{user.email}}</div>
+    <div class="item-event-name">{{user.phone_number}}</div>
+    <div class="item-location" style="width: 100%; height: 100%; display: flex; justify-content: center">
+      <p style="color: #fb5604cf; font-size: 12px">{{user.role}}</p>
+    </div>
+    <div class="item-actions">
+      <button class="approve-button" (click)="retrieveDeletedUserByAdmin(user.user_id)">Restore User</button>
+    </div>
+
+  </div>
+	</div>
+</div>
